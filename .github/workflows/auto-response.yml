@@ -29,7 +29,7 @@ jobs:
       HAS_FALLBACK_KEY: ${{ secrets.GH_APP_PRIVATE_KEY_FALLBACK != '' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
