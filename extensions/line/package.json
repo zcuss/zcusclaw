@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/line",
+  "name": "@zcuss/line",
   "version": "2026.6.2",
   "description": "OpenClaw LINE channel plugin for LINE Bot API chats.",
   "repository": {
@@ -41,7 +41,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/line",
+      "npmSpec": "@zcuss/line",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -55,5 +55,8 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

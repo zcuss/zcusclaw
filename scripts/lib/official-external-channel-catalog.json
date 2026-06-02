@@ -122,7 +122,7 @@
       }
     },
     {
-      "name": "@openclaw/feishu",
+      "name": "@zcuss/feishu",
       "description": "OpenClaw Feishu/Lark channel plugin",
       "source": "official",
       "kind": "channel",
@@ -139,14 +139,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/feishu",
+          "npmSpec": "@zcuss/feishu",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.5.29"
         }
       }
     },
     {
-      "name": "@openclaw/googlechat",
+      "name": "@zcuss/googlechat",
       "description": "OpenClaw Google Chat channel plugin",
       "source": "official",
       "kind": "channel",
@@ -189,14 +189,14 @@
           ]
         },
         "install": {
-          "npmSpec": "@openclaw/googlechat",
+          "npmSpec": "@zcuss/googlechat",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/line",
+      "name": "@zcuss/line",
       "description": "OpenClaw LINE channel plugin",
       "source": "official",
       "kind": "channel",
@@ -214,14 +214,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/line",
+          "npmSpec": "@zcuss/line",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/matrix",
+      "name": "@zcuss/matrix",
       "description": "OpenClaw Matrix channel plugin",
       "source": "official",
       "kind": "channel",
@@ -266,8 +266,8 @@
           ]
         },
         "install": {
-          "clawhubSpec": "clawhub:@openclaw/matrix",
-          "npmSpec": "@openclaw/matrix",
+          "clawhubSpec": "clawhub:@zcuss/matrix",
+          "npmSpec": "@zcuss/matrix",
           "defaultChoice": "clawhub",
           "minHostVersion": ">=2026.4.10",
           "allowInvalidConfigRecovery": true
@@ -275,7 +275,7 @@
       }
     },
     {
-      "name": "@openclaw/msteams",
+      "name": "@zcuss/msteams",
       "description": "OpenClaw Microsoft Teams channel plugin",
       "source": "official",
       "kind": "channel",
@@ -291,14 +291,14 @@
           "order": 60
         },
         "install": {
-          "npmSpec": "@openclaw/msteams",
+          "npmSpec": "@zcuss/msteams",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/nextcloud-talk",
+      "name": "@zcuss/nextcloud-talk",
       "description": "OpenClaw Nextcloud Talk channel plugin",
       "source": "official",
       "kind": "channel",
@@ -315,14 +315,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/nextcloud-talk",
+          "npmSpec": "@zcuss/nextcloud-talk",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/nostr",
+      "name": "@zcuss/nostr",
       "description": "OpenClaw Nostr channel plugin for NIP-04 encrypted DMs",
       "source": "official",
       "kind": "channel",
@@ -338,7 +338,7 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/nostr",
+          "npmSpec": "@zcuss/nostr",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
@@ -368,7 +368,7 @@
       }
     },
     {
-      "name": "@openclaw/slack",
+      "name": "@zcuss/slack",
       "description": "OpenClaw Slack channel plugin",
       "source": "official",
       "kind": "channel",
@@ -395,7 +395,7 @@
           }
         },
         "install": {
-          "npmSpec": "@openclaw/slack",
+          "npmSpec": "@zcuss/slack",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.5.12-beta.1",
           "allowInvalidConfigRecovery": true
@@ -403,7 +403,7 @@
       }
     },
     {
-      "name": "@openclaw/synology-chat",
+      "name": "@zcuss/synology-chat",
       "description": "Synology Chat channel plugin for OpenClaw",
       "source": "official",
       "kind": "channel",
@@ -418,14 +418,14 @@
           "order": 90
         },
         "install": {
-          "npmSpec": "@openclaw/synology-chat",
+          "npmSpec": "@zcuss/synology-chat",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/tlon",
+      "name": "@zcuss/tlon",
       "description": "OpenClaw Tlon/Urbit channel plugin",
       "source": "official",
       "kind": "channel",
@@ -441,14 +441,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/tlon",
+          "npmSpec": "@zcuss/tlon",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/twitch",
+      "name": "@zcuss/twitch",
       "description": "OpenClaw Twitch channel plugin",
       "source": "official",
       "kind": "channel",
@@ -462,14 +462,14 @@
           "aliases": ["twitch-chat"]
         },
         "install": {
-          "npmSpec": "@openclaw/twitch",
+          "npmSpec": "@zcuss/twitch",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/zalo",
+      "name": "@zcuss/zalo",
       "description": "OpenClaw Zalo channel plugin",
       "source": "official",
       "kind": "channel",
@@ -486,14 +486,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@openclaw/zalo",
+          "npmSpec": "@zcuss/zalo",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@openclaw/zalouser",
+      "name": "@zcuss/zalouser",
       "description": "OpenClaw Zalo Personal Account plugin via native zca-js integration",
       "source": "official",
       "kind": "channel",
@@ -510,7 +510,7 @@
           "quickstartAllowFrom": false
         },
         "install": {
-          "npmSpec": "@openclaw/zalouser",
+          "npmSpec": "@zcuss/zalouser",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }

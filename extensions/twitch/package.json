@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/twitch",
+  "name": "@zcuss/twitch",
   "version": "2026.6.2",
   "description": "OpenClaw Twitch channel plugin for chat and moderation workflows.",
   "repository": {
@@ -22,7 +22,7 @@
     ],
     "setupEntry": "./setup-entry.ts",
     "install": {
-      "npmSpec": "@openclaw/twitch",
+      "npmSpec": "@zcuss/twitch",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -46,5 +46,8 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

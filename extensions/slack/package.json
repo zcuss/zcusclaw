@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/slack",
+  "name": "@zcuss/slack",
   "version": "2026.6.2",
   "description": "OpenClaw Slack channel plugin for channels, DMs, commands, and app events.",
   "repository": {
@@ -58,7 +58,7 @@
       }
     },
     "install": {
-      "npmSpec": "@openclaw/slack",
+      "npmSpec": "@zcuss/slack",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.28",
       "allowInvalidConfigRecovery": true
@@ -77,5 +77,8 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

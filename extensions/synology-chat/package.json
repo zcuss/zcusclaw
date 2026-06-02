@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/synology-chat",
+  "name": "@zcuss/synology-chat",
   "version": "2026.6.2",
   "description": "Synology Chat channel plugin for OpenClaw channels and direct messages.",
   "repository": {
@@ -25,7 +25,7 @@
       "order": 90
     },
     "install": {
-      "npmSpec": "@openclaw/synology-chat",
+      "npmSpec": "@zcuss/synology-chat",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -42,5 +42,8 @@
   },
   "dependencies": {
     "zod": "4.4.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/matrix",
+  "name": "@zcuss/matrix",
   "version": "2026.6.2",
   "description": "OpenClaw Matrix channel plugin for rooms and direct messages.",
   "repository": {
@@ -82,7 +82,7 @@
     },
     "install": {
       "clawhubSpec": "clawhub:@openclaw/matrix",
-      "npmSpec": "@openclaw/matrix",
+      "npmSpec": "@zcuss/matrix",
       "defaultChoice": "clawhub",
       "minHostVersion": ">=2026.4.10",
       "allowInvalidConfigRecovery": true
@@ -97,5 +97,8 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

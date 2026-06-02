@@ -71,12 +71,25 @@ jobs:
       matrix:
         addon:
           - extensions/clickclack
+          - extensions/feishu
+          - extensions/googlechat
           - extensions/imessage
           - extensions/irc
+          - extensions/line
+          - extensions/matrix
           - extensions/mattermost
+          - extensions/msteams
+          - extensions/nextcloud-talk
+          - extensions/nostr
           - extensions/qqbot
           - extensions/signal
+          - extensions/slack
           - extensions/sms
+          - extensions/synology-chat
+          - extensions/tlon
+          - extensions/twitch
+          - extensions/zalo
+          - extensions/zalouser
     steps:
       - name: Checkout
         uses: actions/checkout@v4

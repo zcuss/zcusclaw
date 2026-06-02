@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/feishu",
+  "name": "@zcuss/feishu",
   "version": "2026.6.2",
   "description": "OpenClaw Feishu/Lark channel plugin for chats and workplace tools (community maintained by @m1heng).",
   "repository": {
@@ -46,7 +46,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/feishu",
+      "npmSpec": "@zcuss/feishu",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.29"
     },
@@ -60,5 +60,8 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
