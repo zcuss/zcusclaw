@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/clickclack",
+  "name": "@zcuss/channel-clickclack",
   "version": "2026.6.2",
   "description": "OpenClaw ClickClack channel plugin",
   "type": "module",
@@ -50,7 +50,7 @@
     },
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@zcuss/clickclack"
+      "npmSpec": "@zcuss/channel-clickclack"
     },
     "release": {
       "publishToClawHub": true,

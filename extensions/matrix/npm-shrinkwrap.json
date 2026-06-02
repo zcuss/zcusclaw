@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/matrix",
+  "name": "@zcuss/channel-matrix",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/matrix",
+      "name": "@zcuss/channel-matrix",
       "version": "2026.6.2",
       "dependencies": {
         "@matrix-org/matrix-sdk-crypto-nodejs": "0.6.0",

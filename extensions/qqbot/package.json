@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/qqbot",
+  "name": "@zcuss/channel-qqbot",
   "version": "2026.6.2",
   "private": false,
   "description": "OpenClaw QQ Bot channel plugin for group and direct-message workflows.",
@@ -47,7 +47,7 @@
       "systemImage": "bubble.left.and.bubble.right"
     },
     "install": {
-      "npmSpec": "@zcuss/qqbot",
+      "npmSpec": "@zcuss/channel-qqbot",
       "localPath": "extensions/qqbot",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"

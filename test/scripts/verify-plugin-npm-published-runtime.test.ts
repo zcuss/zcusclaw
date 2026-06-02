@@ -214,7 +214,7 @@ describe("collectPluginNpmPublishedRuntimeErrors", () => {
     expect(
       collectPluginNpmPublishedRuntimeErrors({
         packageJson: {
-          name: "@zcuss/qqbot",
+          name: "@zcuss/channel-qqbot",
           version: "2026.5.3",
           openclaw: {
             extensions: ["./index.ts"],

@@ -11,7 +11,7 @@ Adds the Clickclack channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/clickclack`
+- Package: `@zcuss/channel-clickclack`
 - Install route: included in OpenClaw
 
 ## Surface

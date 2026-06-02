@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/msteams",
+  "name": "@zcuss/channel-msteams",
   "version": "2026.6.2",
   "description": "OpenClaw Microsoft Teams channel plugin for bot conversations.",
   "repository": {
@@ -51,7 +51,7 @@
       }
     },
     "install": {
-      "npmSpec": "@zcuss/msteams",
+      "npmSpec": "@zcuss/channel-msteams",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },

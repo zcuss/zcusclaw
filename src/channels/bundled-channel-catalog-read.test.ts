@@ -136,7 +136,7 @@ describe("listBundledChannelCatalogEntries", () => {
     writeJsonFile(path.join(root, "dist", "channel-catalog.json"), {
       entries: [
         {
-          name: "@zcuss/qqbot",
+          name: "@zcuss/channel-qqbot",
           openclaw: {
             channel: {
               id: "qqbot",

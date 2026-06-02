@@ -11,7 +11,7 @@ Adds the Mattermost channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/mattermost`
+- Package: `@zcuss/channel-mattermost`
 - Install route: included in OpenClaw
 
 ## Surface

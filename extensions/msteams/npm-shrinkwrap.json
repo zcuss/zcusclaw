@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/msteams",
+  "name": "@zcuss/channel-msteams",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/msteams",
+      "name": "@zcuss/channel-msteams",
       "version": "2026.6.2",
       "dependencies": {
         "@azure/identity": "4.13.1",

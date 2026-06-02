@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/googlechat",
+  "name": "@zcuss/channel-googlechat",
   "version": "2026.6.2",
   "description": "OpenClaw Google Chat channel plugin for spaces and direct messages.",
   "repository": {
@@ -70,7 +70,7 @@
       ]
     },
     "install": {
-      "npmSpec": "@zcuss/googlechat",
+      "npmSpec": "@zcuss/channel-googlechat",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },

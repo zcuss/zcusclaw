@@ -16,7 +16,7 @@ Install Mattermost before configuring the channel:
 <Tabs>
   <Tab title="npm registry">
     ```bash
-    openclaw plugins install @zcuss/mattermost
+    openclaw plugins install @zcuss/channel-mattermost
     ```
   </Tab>
   <Tab title="Local checkout">
