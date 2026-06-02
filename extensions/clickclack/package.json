@@ -1,7 +1,6 @@
 {
   "name": "@openclaw/clickclack",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw ClickClack channel plugin",
   "type": "module",
   "exports": {

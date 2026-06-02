@@ -164,7 +164,15 @@ describe("bundled plugin build entries", () => {
       expectSomePrefixMatch(Object.keys(entries), `extensions/${pluginId}/`);
       expectNoPrefixMatches(artifacts, `dist/extensions/${pluginId}/`);
     }
-    for (const pluginId of ["qqbot", "whatsapp"]) {
+    for (const pluginId of [
+      "clickclack",
+      "imessage",
+      "irc",
+      "mattermost",
+      "qqbot",
+      "signal",
+      "sms",
+    ]) {
       expectNoPrefixMatches(Object.keys(entries), `extensions/${pluginId}/`);
       expectNoPrefixMatches(artifacts, `dist/extensions/${pluginId}/`);
     }

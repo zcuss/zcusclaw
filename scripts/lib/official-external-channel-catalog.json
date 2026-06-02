@@ -122,32 +122,6 @@
       }
     },
     {
-      "name": "@openclaw/discord",
-      "description": "OpenClaw Discord channel plugin",
-      "source": "official",
-      "kind": "channel",
-      "openclaw": {
-        "channel": {
-          "id": "discord",
-          "label": "Discord",
-          "selectionLabel": "Discord (Bot API)",
-          "detailLabel": "Discord Bot",
-          "docsPath": "/channels/discord",
-          "docsLabel": "discord",
-          "blurb": "very well supported right now.",
-          "systemImage": "bubble.left.and.bubble.right",
-          "markdownCapable": true,
-          "preferSessionLookupForAnnounceTarget": true
-        },
-        "install": {
-          "npmSpec": "@openclaw/discord",
-          "defaultChoice": "npm",
-          "minHostVersion": ">=2026.4.10",
-          "allowInvalidConfigRecovery": true
-        }
-      }
-    },
-    {
       "name": "@openclaw/feishu",
       "description": "OpenClaw Feishu/Lark channel plugin",
       "source": "official",
@@ -495,30 +469,6 @@
       }
     },
     {
-      "name": "@openclaw/whatsapp",
-      "description": "OpenClaw WhatsApp channel plugin",
-      "source": "official",
-      "kind": "channel",
-      "openclaw": {
-        "channel": {
-          "id": "whatsapp",
-          "label": "WhatsApp",
-          "selectionLabel": "WhatsApp (QR link)",
-          "detailLabel": "WhatsApp Web",
-          "docsPath": "/channels/whatsapp",
-          "docsLabel": "whatsapp",
-          "blurb": "works with your own number; recommend a separate phone + eSIM.",
-          "systemImage": "message"
-        },
-        "install": {
-          "clawhubSpec": "clawhub:@openclaw/whatsapp",
-          "npmSpec": "@openclaw/whatsapp",
-          "defaultChoice": "clawhub",
-          "minHostVersion": ">=2026.4.25"
-        }
-      }
-    },
-    {
       "name": "@openclaw/zalo",
       "description": "OpenClaw Zalo channel plugin",
       "source": "official",
@@ -563,6 +513,150 @@
           "npmSpec": "@openclaw/zalouser",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/clickclack",
+      "description": "OpenClaw ClickClack channel plugin",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "clickclack",
+          "label": "ClickClack",
+          "selectionLabel": "ClickClack",
+          "detailLabel": "ClickClack Bot",
+          "docsPath": "/channels/clickclack",
+          "docsLabel": "clickclack",
+          "blurb": "self-hosted chat via first-class ClickClack bot tokens.",
+          "systemImage": "bubble.left.and.bubble.right",
+          "markdownCapable": true,
+          "preferSessionLookupForAnnounceTarget": true,
+          "order": 85
+        },
+        "install": {
+          "npmSpec": "@openclaw/clickclack",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.6.2"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/imessage",
+      "description": "OpenClaw iMessage channel plugin using imsg on a signed-in Mac",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "imessage",
+          "label": "iMessage",
+          "selectionLabel": "iMessage (imsg)",
+          "detailLabel": "iMessage",
+          "docsPath": "/channels/imessage",
+          "docsLabel": "imessage",
+          "blurb": "Local iMessage/SMS through the imsg bridge, including private API message actions when enabled.",
+          "aliases": ["imsg"],
+          "systemImage": "message.fill"
+        },
+        "install": {
+          "npmSpec": "@openclaw/imessage",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.6.2"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/irc",
+      "description": "OpenClaw IRC channel plugin",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "irc",
+          "label": "IRC",
+          "selectionLabel": "IRC (Server + Nick)",
+          "detailLabel": "IRC",
+          "docsPath": "/channels/irc",
+          "docsLabel": "irc",
+          "blurb": "classic IRC networks with DM/channel routing and pairing controls.",
+          "aliases": ["internet-relay-chat"],
+          "systemImage": "network"
+        },
+        "install": {
+          "npmSpec": "@openclaw/irc",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.4.10"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/mattermost",
+      "description": "OpenClaw Mattermost channel plugin",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "mattermost",
+          "label": "Mattermost",
+          "selectionLabel": "Mattermost (plugin)",
+          "docsPath": "/channels/mattermost",
+          "docsLabel": "mattermost",
+          "blurb": "self-hosted Slack-style chat; install the plugin to enable.",
+          "order": 65
+        },
+        "install": {
+          "npmSpec": "@openclaw/mattermost",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.4.10"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/signal",
+      "description": "OpenClaw Signal channel plugin",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "signal",
+          "label": "Signal",
+          "selectionLabel": "Signal (signal-cli)",
+          "detailLabel": "Signal REST",
+          "docsPath": "/channels/signal",
+          "docsLabel": "signal",
+          "blurb": "signal-cli linked device; more setup (David Reagans: \"Hop on Discord.\").",
+          "systemImage": "antenna.radiowaves.left.and.right",
+          "markdownCapable": true
+        },
+        "install": {
+          "npmSpec": "@openclaw/signal",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.6.2"
+        }
+      }
+    },
+    {
+      "name": "@openclaw/sms",
+      "description": "OpenClaw SMS channel plugin for Twilio text messages.",
+      "source": "official",
+      "kind": "channel",
+      "openclaw": {
+        "channel": {
+          "id": "sms",
+          "label": "SMS",
+          "selectionLabel": "SMS (Twilio)",
+          "detailLabel": "Twilio SMS",
+          "docsPath": "/channels/sms",
+          "docsLabel": "sms",
+          "blurb": "Twilio-backed SMS with inbound webhooks and outbound replies.",
+          "order": 88,
+          "quickstartAllowFrom": true
+        },
+        "install": {
+          "npmSpec": "@openclaw/sms",
+          "defaultChoice": "npm",
+          "minHostVersion": ">=2026.6.2"
         }
       }
     }
