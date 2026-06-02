@@ -38,7 +38,13 @@
       "order": 65
     },
     "install": {
+      "defaultChoice": "npm",
+      "npmSpec": "@openclaw/mattermost",
       "minHostVersion": ">=2026.4.10"
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
     }
   }
 }

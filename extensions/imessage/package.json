@@ -10,6 +10,10 @@
     "extensions": [
       "./index.ts"
     ],
+    "install": {
+      "defaultChoice": "npm",
+      "npmSpec": "@openclaw/imessage"
+    },
     "setupEntry": "./setup-entry.ts",
     "setupFeatures": {
       "legacyStateMigrations": true
@@ -46,6 +50,10 @@
     },
     "build": {
       "openclawVersion": "2026.6.2"
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
     }
   },
   "pluginInspector": {

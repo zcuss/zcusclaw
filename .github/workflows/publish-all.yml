@@ -1,0 +1,108 @@
+name: Publish All to NPM
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  NODE_VERSION: "24.15.0"
+  OPENCLAW_NPM_PUBLISH_PROVENANCE: "0"
+
+jobs:
+  publish-core:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        run: corepack enable && pnpm --version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Check if core version already published
+        id: check-core
+        run: |
+          CORE_NAME=$(node -p "require('./package.json').name")
+          CORE_VERSION=$(node -p "require('./package.json').version")
+          if npm view "${CORE_NAME}@${CORE_VERSION}" version 2>/dev/null; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::${CORE_NAME}@${CORE_VERSION} already published, skipping."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish Core Package
+        if: steps.check-core.outputs.skip != 'true'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-addons:
+    needs: publish-core
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        addon:
+          - extensions/clickclack
+          - extensions/imessage
+          - extensions/irc
+          - extensions/mattermost
+          - extensions/qqbot
+          - extensions/signal
+          - extensions/sms
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        run: corepack enable && pnpm --version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Check if addon version already published
+        id: check-addon
+        run: |
+          ADDON_NAME=$(node -p "require('./${{ matrix.addon }}/package.json').name")
+          ADDON_VERSION=$(node -p "require('./${{ matrix.addon }}/package.json').version")
+          if npm view "${ADDON_NAME}@${ADDON_VERSION}" version 2>/dev/null; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::${ADDON_NAME}@${ADDON_VERSION} already published, skipping."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish Addon Package
+        if: steps.check-addon.outputs.skip != 'true'
+        run: bash scripts/plugin-npm-publish.sh --publish ${{ matrix.addon }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

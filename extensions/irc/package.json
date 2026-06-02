@@ -11,6 +11,8 @@
       "./index.ts"
     ],
     "install": {
+      "defaultChoice": "npm",
+      "npmSpec": "@openclaw/irc",
       "minHostVersion": ">=2026.4.10"
     },
     "setupEntry": "./setup-entry.ts",
@@ -36,6 +38,10 @@
         "specifier": "./configured-state",
         "exportName": "hasIrcConfiguredState"
       }
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
     }
   },
   "dependencies": {

@@ -44,6 +44,14 @@
         "nativeCommandsAutoEnabled": false,
         "nativeSkillsAutoEnabled": false
       }
+    },
+    "install": {
+      "defaultChoice": "npm",
+      "npmSpec": "@openclaw/clickclack"
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
     }
   }
 }

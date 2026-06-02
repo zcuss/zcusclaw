@@ -17,6 +17,10 @@
     "extensions": [
       "./index.ts"
     ],
+    "install": {
+      "defaultChoice": "npm",
+      "npmSpec": "@openclaw/sms"
+    },
     "channel": {
       "id": "sms",
       "label": "SMS",
@@ -33,6 +37,10 @@
     },
     "build": {
       "openclawVersion": "2026.6.2"
+    },
+    "release": {
+      "publishToClawHub": true,
+      "publishToNpm": true
     }
   }
 }
