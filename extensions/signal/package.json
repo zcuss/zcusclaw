@@ -1,8 +1,11 @@
 {
-  "name": "@openclaw/signal",
+  "name": "@zcuss/signal",
   "version": "2026.6.2",
   "description": "OpenClaw Signal channel plugin",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "ws": "8.21.0"
   },
@@ -15,7 +18,7 @@
     ],
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@openclaw/signal"
+      "npmSpec": "@zcuss/signal"
     },
     "setupEntry": "./setup-entry.ts",
     "channel": {

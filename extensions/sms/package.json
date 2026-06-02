@@ -1,12 +1,15 @@
 {
-  "name": "@openclaw/sms",
+  "name": "@zcuss/sms",
   "version": "2026.6.2",
   "description": "OpenClaw SMS channel plugin for Twilio text messages.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openclaw/openclaw"
+    "url": "https://github.com/zcuss/zcusclaw"
   },
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "zod": "4.4.3"
   },
@@ -19,7 +22,7 @@
     ],
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@openclaw/sms"
+      "npmSpec": "@zcuss/sms"
     },
     "channel": {
       "id": "sms",

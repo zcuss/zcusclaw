@@ -1,8 +1,11 @@
 {
-  "name": "@openclaw/imessage",
+  "name": "@zcuss/imessage",
   "version": "2026.6.2",
   "description": "OpenClaw iMessage channel plugin using imsg on a signed-in Mac",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@openclaw/plugin-sdk": "workspace:*"
   },
@@ -12,7 +15,7 @@
     ],
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@openclaw/imessage"
+      "npmSpec": "@zcuss/imessage"
     },
     "setupEntry": "./setup-entry.ts",
     "setupFeatures": {

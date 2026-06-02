@@ -11,7 +11,7 @@ Adds the IRC channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@openclaw/irc`
+- Package: `@zcuss/irc`
 - Install route: included in OpenClaw
 
 ## Surface

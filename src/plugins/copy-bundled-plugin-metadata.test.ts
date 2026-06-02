@@ -441,7 +441,7 @@ describe("copyBundledPluginMetadata", () => {
     const repoRoot = makeRepoRoot("openclaw-bundled-plugin-excluded-meta-");
     createPlugin(repoRoot, {
       id: "qqbot",
-      packageName: "@openclaw/qqbot",
+      packageName: "@zcuss/qqbot",
       packageOpenClaw: {
         extensions: ["./index.ts"],
         setupEntry: "./setup-entry.ts",

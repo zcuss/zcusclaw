@@ -1,12 +1,15 @@
 {
-  "name": "@openclaw/mattermost",
+  "name": "@zcuss/mattermost",
   "version": "2026.6.2",
   "description": "OpenClaw Mattermost channel plugin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openclaw/openclaw"
+    "url": "https://github.com/zcuss/zcusclaw"
   },
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "ws": "8.21.0",
     "zod": "4.4.3"
@@ -39,7 +42,7 @@
     },
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@openclaw/mattermost",
+      "npmSpec": "@zcuss/mattermost",
       "minHostVersion": ">=2026.4.10"
     },
     "release": {

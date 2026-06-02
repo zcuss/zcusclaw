@@ -19,7 +19,7 @@ media are supported. Reactions and threads are not supported.
 Install QQ Bot before setup:
 
 ```bash
-openclaw plugins install @openclaw/qqbot
+openclaw plugins install @zcuss/qqbot
 ```
 
 ## Setup

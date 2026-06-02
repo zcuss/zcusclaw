@@ -11,7 +11,7 @@ Twilio SMS channel plugin for OpenClaw text messages.
 
 ## Distribution
 
-- Package: `@openclaw/sms`
+- Package: `@zcuss/sms`
 - Install route: included in OpenClaw
 
 ## Surface

@@ -1,8 +1,11 @@
 {
-  "name": "@openclaw/clickclack",
+  "name": "@zcuss/clickclack",
   "version": "2026.6.2",
   "description": "OpenClaw ClickClack channel plugin",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "exports": {
     ".": "./index.ts",
     "./api.js": "./api.ts",
@@ -47,7 +50,7 @@
     },
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@openclaw/clickclack"
+      "npmSpec": "@zcuss/clickclack"
     },
     "release": {
       "publishToClawHub": true,

@@ -11,7 +11,7 @@ Adds the iMessage channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@openclaw/imessage`
+- Package: `@zcuss/imessage`
 - Install route: included in OpenClaw
 
 ## Surface

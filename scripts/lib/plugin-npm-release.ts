@@ -81,7 +81,7 @@ export type PublishablePluginPackageCandidate<
   packageJson: TPackageJson;
 };
 
-export const OPENCLAW_PLUGIN_NPM_REPOSITORY_URL = "https://github.com/openclaw/openclaw";
+export const OPENCLAW_PLUGIN_NPM_REPOSITORY_URL = "https://github.com/zcuss/zcusclaw";
 
 function readPluginPackageJson(path: string): unknown {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -233,10 +233,8 @@ export function collectPublishablePluginPackageErrors(
       : (packageJson.repository?.url?.trim() ?? "");
   const extensions = packageJson.openclaw?.extensions ?? [];
 
-  if (!packageName.startsWith("@openclaw/")) {
-    errors.push(
-      `package name must start with "@openclaw/"; found "${packageName || "<missing>"}".`,
-    );
+  if (!packageName.startsWith("@zcuss/")) {
+    errors.push(`package name must start with "@zcuss/"; found "${packageName || "<missing>"}".`);
   }
   if (packageJson.private === true) {
     errors.push("package.json private must not be true.");

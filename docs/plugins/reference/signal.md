@@ -11,7 +11,7 @@ Adds the Signal channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@openclaw/signal`
+- Package: `@zcuss/signal`
 - Install route: included in OpenClaw
 
 ## Surface
