@@ -153,12 +153,17 @@ fi
     OPENCLAW_PLUGIN_NPM_BUNDLE_DEPENDENCIES=1 \
       node scripts/lib/plugin-npm-package-manifest.mjs --run "${package_dir}" -- "$@"
   }
+  registry_host="registry.npmjs.org"
+  if [[ "${package_name}" == "@zcuss/"* ]]; then
+    registry_host="npm.pkg.github.com"
+  fi
   publish_userconfig=""
   if [[ -n "${publish_auth_token}" ]]; then
     publish_userconfig="$(mktemp)"
     cleanup_files+=("${publish_userconfig}")
     chmod 0600 "${publish_userconfig}"
-    printf '%s\n' "//registry.npmjs.org/:_authToken=${publish_auth_token}" > "${publish_userconfig}"
+    printf '%s\n' "@zcuss:registry=https://npm.pkg.github.com/" > "${publish_userconfig}"
+    printf '%s\n' "//${registry_host}/:_authToken=${publish_auth_token}" >> "${publish_userconfig}"
     NPM_CONFIG_USERCONFIG="${publish_userconfig}" run_with_manifest_overlay "${publish_cmd[@]}"
   else
     run_with_manifest_overlay "${publish_cmd[@]}"
@@ -168,7 +173,8 @@ fi
     mirror_userconfig="$(mktemp)"
     cleanup_files+=("${mirror_userconfig}")
     chmod 0600 "${mirror_userconfig}"
-    printf '%s\n' "//registry.npmjs.org/:_authToken=${mirror_auth_token}" > "${mirror_userconfig}"
+    printf '%s\n' "@zcuss:registry=https://npm.pkg.github.com/" > "${mirror_userconfig}"
+    printf '%s\n' "//${registry_host}/:_authToken=${mirror_auth_token}" >> "${mirror_userconfig}"
 
     IFS=',' read -r -a mirror_dist_tags <<< "${mirror_dist_tags_csv}"
     for dist_tag in "${mirror_dist_tags[@]}"; do

@@ -111,10 +111,8 @@ jobs:
       - name: Publish Addon Package
         if: steps.check-addon.outputs.skip != 'true'
         run: |
-          # Buat .npmrc lokal agar script plugin-npm-publish.sh menggunakan GitHub Packages
           echo "@zcuss:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
           bash scripts/plugin-npm-publish.sh --publish ${{ matrix.addon }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
