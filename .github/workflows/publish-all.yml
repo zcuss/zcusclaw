@@ -22,7 +22,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       - name: Setup Node environment
         uses: actions/setup-node@v4
@@ -92,7 +92,7 @@ jobs:
           - extensions/zalouser
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       - name: Setup Node environment
         uses: actions/setup-node@v4

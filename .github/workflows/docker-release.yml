@@ -44,7 +44,7 @@ jobs:
           fi
 
       - name: Checkout selected tag
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: refs/tags/${{ inputs.tag }}
           fetch-depth: 0
@@ -78,7 +78,7 @@ jobs:
       browser_digest: ${{ steps.build-browser.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.tag) || github.ref }}
           fetch-depth: 0
@@ -269,7 +269,7 @@ jobs:
       browser_digest: ${{ steps.build-browser.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.tag) || github.ref }}
           fetch-depth: 0
@@ -457,7 +457,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.tag) || github.ref }}
           fetch-depth: 0
@@ -552,7 +552,7 @@ jobs:
       packages: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 1
 
