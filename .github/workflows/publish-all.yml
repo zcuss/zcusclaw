@@ -2,6 +2,9 @@ name: Publish All to GitHub Packages
 
 on:
   push:
+    branches:
+      - Main
+      - main
     tags:
       - 'v*'
   workflow_dispatch:
