@@ -17,7 +17,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "bin": {
-    "openclaw": "openclaw.mjs"
+    "zcusclaw": "openclaw.mjs"
   },
   "directories": {
     "doc": "docs",

@@ -134,7 +134,7 @@ export function printDaemonStatus(status: DaemonStatus, opts: { json: boolean })
     }
     defaultRuntime.error(
       warnText(
-        `Recommendation: run "${formatCliCommand("openclaw doctor")}" (or "${formatCliCommand("openclaw doctor --repair")}").`,
+        `Recommendation: run "${formatCliCommand("zcusclaw doctor")}" (or "${formatCliCommand("zcusclaw doctor --repair")}").`,
       ),
     );
   }
@@ -188,7 +188,7 @@ export function printDaemonStatus(status: DaemonStatus, opts: { json: boolean })
       );
       defaultRuntime.error(
         errorText(
-          `Fix: rerun \`${formatCliCommand("openclaw gateway install --force")}\` from the same --profile / OPENCLAW_STATE_DIR you expect.`,
+          `Fix: rerun \`${formatCliCommand("zcusclaw gateway install --force")}\` from the same --profile / OPENCLAW_STATE_DIR you expect.`,
         ),
       );
     }

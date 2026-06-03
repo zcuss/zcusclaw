@@ -119,10 +119,10 @@ export function renderOverview(props: OverviewProps) {
           : nothing}
         <div style="margin-top: 6px">
           ${pairingState.requestId
-            ? html`<span class="mono">openclaw devices approve ${pairingState.requestId}</span
+            ? html`<span class="mono">zcusclaw devices approve ${pairingState.requestId}</span
                 ><br />`
             : nothing}
-          <span class="mono">openclaw devices list</span>
+          <span class="mono">zcusclaw devices list</span>
         </div>
         <div style="margin-top: 6px; font-size: 12px;">${t("overview.pairing.mobileHint")}</div>
         <div style="margin-top: 6px">
@@ -155,8 +155,8 @@ export function renderOverview(props: OverviewProps) {
         <div class="muted" style="margin-top: 8px">
           ${t("overview.auth.required")}
           <div style="margin-top: 6px">
-            <span class="mono">openclaw dashboard --no-open</span> → tokenized URL<br />
-            <span class="mono">openclaw doctor --generate-gateway-token</span> → set token
+            <span class="mono">zcusclaw dashboard --no-open</span> → tokenized URL<br />
+            <span class="mono">zcusclaw doctor --generate-gateway-token</span> → set token
           </div>
           <div style="margin-top: 6px">
             <a
@@ -173,7 +173,7 @@ export function renderOverview(props: OverviewProps) {
     }
     return html`
       <div class="muted" style="margin-top: 8px">
-        ${t("overview.auth.failed", { command: "openclaw dashboard --no-open" })}
+        ${t("overview.auth.failed", { command: "zcusclaw dashboard --no-open" })}
         <div style="margin-top: 6px">
           <a
             class="session-link"
@@ -201,7 +201,7 @@ export function renderOverview(props: OverviewProps) {
     }
     return html`
       <div class="muted" style="margin-top: 8px">
-        ${t("overview.insecure.hint", { url: "http://127.0.0.1:18789" })}
+        ${t("overview.insecure.hint", { url: "http://127.0.0.1:18999" })}
         <div style="margin-top: 6px">
           ${t("overview.insecure.stayHttp", {
             config: "gateway.controlUi.allowInsecureAuth: true",
@@ -271,7 +271,7 @@ export function renderOverview(props: OverviewProps) {
                   token: v.trim() === props.settings.gatewayUrl.trim() ? props.settings.token : "",
                 });
               }}
-              placeholder="ws://100.x.y.z:18789"
+              placeholder="ws://100.x.y.z:18999"
             />
           </label>
           ${isTrustedProxy
@@ -381,15 +381,15 @@ export function renderOverview(props: OverviewProps) {
                 <ol class="login-gate__steps">
                   <li>
                     ${t("overview.connection.step1")}
-                    ${renderConnectCommand("openclaw gateway run")}
+                    ${renderConnectCommand("zcusclaw gateway run")}
                   </li>
                   <li>
-                    ${t("overview.connection.step2")} ${renderConnectCommand("openclaw dashboard")}
+                    ${t("overview.connection.step2")} ${renderConnectCommand("zcusclaw dashboard")}
                   </li>
                   <li>${t("overview.connection.step3")}</li>
                   <li>
                     ${t("overview.connection.step4")}<code
-                      >openclaw doctor --generate-gateway-token</code
+                      >zcusclaw doctor --generate-gateway-token</code
                     >
                   </li>
                 </ol>

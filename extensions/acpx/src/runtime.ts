@@ -311,7 +311,7 @@ function createResetAwareSessionStore(
   };
 }
 
-const OPENCLAW_BRIDGE_EXECUTABLE = "openclaw";
+const OPENCLAW_BRIDGE_EXECUTABLE = "zcusclaw";
 const OPENCLAW_BRIDGE_SUBCOMMAND = "acp";
 const CODEX_ACP_AGENT_ID = "codex";
 const CODEX_ACP_OPENCLAW_PREFIX = "openai/";
@@ -431,14 +431,20 @@ function isOpenClawBridgeCommand(command: string | undefined): boolean {
     return false;
   }
   const parts = unwrapEnvCommand(splitCommandParts(command.trim()));
-  if (basename(parts[0] ?? "") === OPENCLAW_BRIDGE_EXECUTABLE) {
+  if (
+    basename(parts[0] ?? "") === OPENCLAW_BRIDGE_EXECUTABLE ||
+    basename(parts[0] ?? "") === "openclaw"
+  ) {
     return parts[1] === OPENCLAW_BRIDGE_SUBCOMMAND;
   }
   if (basename(parts[0] ?? "") !== "node") {
     return false;
   }
   const scriptName = basename(parts[1] ?? "");
-  return /^openclaw(?:\.[cm]?js)?$/i.test(scriptName) && parts[2] === OPENCLAW_BRIDGE_SUBCOMMAND;
+  return (
+    /^(?:openclaw|zcusclaw)(?:\.[cm]?js)?$/i.test(scriptName) &&
+    parts[2] === OPENCLAW_BRIDGE_SUBCOMMAND
+  );
 }
 
 function isCodexAcpCommand(command: string | undefined): boolean {

@@ -395,7 +395,7 @@ export async function finalizeSetupWizard(
           t("wizard.finalize.gatewayNotDetected"),
           t("wizard.finalize.noBackgroundGatewayExpected"),
           t("wizard.finalize.startGatewayNow", {
-            command: formatCliCommand("openclaw gateway run"),
+            command: formatCliCommand("zcusclaw gateway run"),
           }),
           t("wizard.finalize.rerunInstallDaemon", {
             command: formatCliCommand("openclaw onboard --install-daemon"),
@@ -499,14 +499,14 @@ export async function finalizeSetupWizard(
         t("wizard.finalize.gatewayTokenShared"),
         t("wizard.finalize.gatewayTokenStored"),
         t("wizard.finalize.gatewayTokenView", {
-          command: formatCliCommand("openclaw config get gateway.auth.token"),
+          command: formatCliCommand("zcusclaw config get gateway.auth.token"),
         }),
         t("wizard.finalize.gatewayTokenGenerate", {
-          command: formatCliCommand("openclaw doctor --generate-gateway-token"),
+          command: formatCliCommand("zcusclaw doctor --generate-gateway-token"),
         }),
         suppressGatewayTokenOutput ? undefined : t("wizard.finalize.dashboardTokenMemory"),
         t("wizard.finalize.dashboardOpenAnytime", {
-          command: formatCliCommand("openclaw dashboard --no-open"),
+          command: formatCliCommand("zcusclaw dashboard --no-open"),
         }),
         suppressGatewayTokenOutput ? undefined : t("wizard.finalize.dashboardTokenPrompt"),
       ].filter(Boolean);
@@ -555,7 +555,7 @@ export async function finalizeSetupWizard(
     } else {
       await prompter.note(
         t("wizard.finalize.dashboardWhenReady", {
-          command: formatCliCommand("openclaw dashboard --no-open"),
+          command: formatCliCommand("zcusclaw dashboard --no-open"),
         }),
         t("wizard.finalize.laterTitle"),
       );

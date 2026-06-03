@@ -388,7 +388,7 @@ function formatBrowserWebSocketConstructorError(err: unknown, url: string): Gate
       message:
         "Browser refused the Gateway WebSocket for security reasons." +
         (isPlaintextWs
-          ? " Use wss:// when the Control UI is served over HTTPS/Tailscale Serve, or open the loopback dashboard at http://127.0.0.1:18789."
+          ? " Use wss:// when the Control UI is served over HTTPS/Tailscale Serve, or open the loopback dashboard at http://127.0.0.1:18999."
           : " Check the Gateway WebSocket URL and browser security policy."),
       details: {
         code: BROWSER_WEBSOCKET_SECURITY_ERROR_CODE,

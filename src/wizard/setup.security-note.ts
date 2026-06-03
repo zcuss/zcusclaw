@@ -34,7 +34,7 @@ export function getSecurityNoteMessage(): string {
     `- ${t("wizard.security.baselineStrongModel")}`,
     "",
     heading(t("wizard.security.runRegularly")),
-    formatCliCommand("openclaw security audit --deep"),
+    formatCliCommand("zcusclaw security audit --deep"),
     formatCliCommand("openclaw security audit --fix"),
     "",
     heading(t("wizard.security.learnMore")),
