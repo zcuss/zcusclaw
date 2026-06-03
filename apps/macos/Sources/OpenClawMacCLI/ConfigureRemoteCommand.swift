@@ -9,8 +9,8 @@ private let appOnboardingVersion = 7
 struct ConfigureRemoteOptions {
     var sshTarget: String?
     var directUrl: String?
-    var localPort: Int = 18789
-    var remotePort: Int = 18789
+    var localPort: Int = 18999
+    var remotePort: Int = 18999
     var token: String?
     var password: String?
     var identity: String?
@@ -85,8 +85,8 @@ func runConfigureRemote(_ args: [String]) {
             Options:
               --ssh-target <t>    SSH target for the remote gateway host.
               --direct-url <url>  Direct remote gateway URL; skips SSH tunneling.
-              --local-port <p>    Local tunnel port for the mac app/UI. Default: 18789.
-              --remote-port <p>   Gateway port on the remote host. Default: 18789.
+              --local-port <p>    Local tunnel port for the mac app/UI. Default: 18999.
+              --remote-port <p>   Gateway port on the remote host. Default: 18999.
               --token <token>     Remote gateway token.
               --password <pw>     Remote gateway password.
               --identity <path>   SSH identity file.
@@ -257,7 +257,7 @@ private func normalizeDirectURL(_ raw: String) -> URL? {
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return url
         }
-        components.port = 18789
+        components.port = 18999
         return components.url
     }
     return url
@@ -269,7 +269,7 @@ private func defaultPort(for url: URL) -> Int? {
     case "wss":
         return 443
     case "ws":
-        return 18789
+        return 18999
     default:
         return nil
     }

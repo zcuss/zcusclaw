@@ -54,8 +54,8 @@ private func printUsage() {
 
     Examples:
       openclaw-mac connect
-      openclaw-mac configure-remote --ssh-target user@gateway.local --remote-port 18789
-      openclaw-mac connect --url ws://127.0.0.1:18789 --json
+      openclaw-mac configure-remote --ssh-target user@gateway.local --remote-port 18999
+      openclaw-mac connect --url ws://127.0.0.1:18999 --json
       openclaw-mac discover --timeout 3000 --json
       openclaw-mac wizard --mode local
     """)

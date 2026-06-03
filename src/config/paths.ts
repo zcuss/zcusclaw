@@ -20,7 +20,7 @@ export const isNixMode = resolveIsNixMode();
 
 // Support the remaining legacy pre-rebrand state dir.
 const LEGACY_STATE_DIRNAMES = [".clawdbot"] as const;
-const NEW_STATE_DIRNAME = ".openclaw";
+const NEW_STATE_DIRNAME = ".openclaw-zcus";
 const CONFIG_FILENAME = "openclaw.json";
 const LEGACY_CONFIG_FILENAMES = ["clawdbot.json"] as const;
 
@@ -260,7 +260,7 @@ export function resolveDefaultConfigCandidates(
   return candidates;
 }
 
-export const DEFAULT_GATEWAY_PORT = 18789;
+export const DEFAULT_GATEWAY_PORT = 18999;
 
 /**
  * Gateway lock directory (ephemeral).

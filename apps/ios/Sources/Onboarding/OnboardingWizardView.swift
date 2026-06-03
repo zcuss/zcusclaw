@@ -54,8 +54,8 @@ struct OnboardingWizardView: View {
     @State private var step: OnboardingStep
     @State private var selectedMode: OnboardingConnectionMode?
     @State private var manualHost: String = ""
-    @State private var manualPort: Int = 18789
-    @State private var manualPortText: String = "18789"
+    @State private var manualPort: Int = 18999
+    @State private var manualPortText: String = "18999"
     @State private var manualTLS: Bool = true
     @State private var gatewayToken: String = ""
     @State private var gatewayPassword: String = ""
@@ -765,12 +765,12 @@ extension OnboardingWizardView {
                     self.manualTLS = useTLS
                 case .discovered:
                     self.manualHost = "openclaw.local"
-                    self.manualPort = 18789
+                    self.manualPort = 18999
                     self.manualTLS = true
                 }
             } else {
                 self.manualHost = "openclaw.local"
-                self.manualPort = 18789
+                self.manualPort = 18999
                 self.manualTLS = true
             }
         }
@@ -844,15 +844,15 @@ extension OnboardingWizardView {
         case .homeNetwork:
             if hostIsDefaultLike { self.manualHost = "openclaw.local" }
             self.manualTLS = true
-            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18789 }
+            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18999 }
         case .remoteDomain:
             if host == "openclaw.local" || host == "localhost" { self.manualHost = "" }
             self.manualTLS = true
-            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18789 }
+            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18999 }
         case .developerLocal:
             if hostIsDefaultLike { self.manualHost = "localhost" }
             self.manualTLS = false
-            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18789 }
+            if self.manualPort <= 0 || self.manualPort > 65535 { self.manualPort = 18999 }
         }
     }
 

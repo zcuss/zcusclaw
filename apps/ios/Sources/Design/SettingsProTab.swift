@@ -28,7 +28,7 @@ struct SettingsProTab: View {
     @AppStorage("gateway.autoconnect") var gatewayAutoConnect: Bool = false
     @AppStorage("gateway.manual.enabled") var manualGatewayEnabled: Bool = false
     @AppStorage("gateway.manual.host") var manualGatewayHost: String = ""
-    @AppStorage("gateway.manual.port") var manualGatewayPort: Int = 18789
+    @AppStorage("gateway.manual.port") var manualGatewayPort: Int = 18999
     @AppStorage("gateway.manual.tls") var manualGatewayTLS: Bool = true
     @AppStorage("gateway.discovery.debugLogs") var discoveryDebugLogsEnabled: Bool = false
     @AppStorage("canvas.debugStatusEnabled") var canvasDebugStatusEnabled: Bool = false

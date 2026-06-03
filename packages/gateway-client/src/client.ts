@@ -351,7 +351,7 @@ type FingerprintCheckingClientOptions = Omit<ClientOptions, "checkServerIdentity
   checkServerIdentity?: (servername: string, cert: CertMeta) => Error | undefined;
 };
 
-const DEFAULT_GATEWAY_CLIENT_URL = "ws://127.0.0.1:18789";
+const DEFAULT_GATEWAY_CLIENT_URL = "ws://127.0.0.1:18999";
 const DEFAULT_CLIENT_VERSION = "0.0.0";
 
 export type GatewayReconnectPausedInfo = {
@@ -398,7 +398,7 @@ export function isGatewayConnectAssemblyError(value: unknown): value is Error {
 }
 
 export type GatewayClientOptions = {
-  url?: string; // ws://127.0.0.1:18789
+  url?: string; // ws://127.0.0.1:18999
   connectChallengeTimeoutMs?: number;
   /** @deprecated Use connectChallengeTimeoutMs. */
   connectDelayMs?: number;
@@ -600,7 +600,7 @@ export class GatewayClient {
         `SECURITY ERROR: Cannot connect to "${displayHost}" over plaintext ws://. ` +
           "Both credentials and chat data would be exposed to network interception. " +
           "Use wss:// for remote URLs. Safe defaults: keep gateway.bind=loopback and connect via SSH tunnel " +
-          "(ssh -N -L 18789:127.0.0.1:18789 user@gateway-host), or use Tailscale Serve/Funnel. " +
+          "(ssh -N -L 18999:127.0.0.1:18999 user@gateway-host), or use Tailscale Serve/Funnel. " +
           (allowPrivateWs
             ? ""
             : "Break-glass (trusted private networks only): set OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1. ") +
@@ -1212,7 +1212,7 @@ export class GatewayClient {
   }
 
   private isTrustedDeviceRetryEndpoint(): boolean {
-    const rawUrl = this.opts.url ?? "ws://127.0.0.1:18789";
+    const rawUrl = this.opts.url ?? "ws://127.0.0.1:18999";
     try {
       const parsed = new URL(rawUrl);
       const protocol =

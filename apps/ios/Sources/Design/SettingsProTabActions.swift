@@ -506,7 +506,7 @@ extension SettingsProTab {
         if self.manualGatewayTLS, trimmed.lowercased().hasSuffix(".ts.net") {
             return 443
         }
-        return 18789
+        return 18999
     }
 
     var setupStatusLine: String? {

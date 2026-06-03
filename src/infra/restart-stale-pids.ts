@@ -131,7 +131,7 @@ function readParentPidFromPs(pid: number, spawnTimeoutMs: number): number | null
  * "a cleanup step must never destroy its own caller." That invariant was
  * applied only to the caller itself, not to its ancestors — which is how
  * issue #68451 arises: a plugin sidecar calls the cleanup, `lsof` reports
- * the parent gateway listening on 18789, the parent's PID passes the
+ * the parent gateway listening on 18999, the parent's PID passes the
  * `pid !== process.pid` filter, it is SIGTERM'd, the sidecar is then reaped
  * by the supervisor, the supervisor restarts the gateway, which re-spawns
  * the sidecar, which runs the cleanup again — infinite restart loop.

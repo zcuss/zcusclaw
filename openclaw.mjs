@@ -413,8 +413,8 @@ const resolveLauncherConfigPaths = () => {
   }
   const homeDir = resolveLauncherHomeDir();
   return [
-    path.join(homeDir, ".openclaw", "openclaw.json"),
-    path.join(homeDir, ".openclaw", "clawdbot.json"),
+    path.join(homeDir, ".openclaw-zcus", "openclaw.json"),
+    path.join(homeDir, ".openclaw-zcus", "clawdbot.json"),
     path.join(homeDir, ".clawdbot", "openclaw.json"),
     path.join(homeDir, ".clawdbot", "clawdbot.json"),
   ];
