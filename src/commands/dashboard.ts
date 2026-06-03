@@ -14,9 +14,17 @@ import {
 type DashboardOptions = {
   noOpen?: boolean;
   yes?: boolean;
+  route?: "config";
 };
 
-async function resolveDashboardTarget() {
+function appendDashboardRoute(baseUrl: string, route: DashboardOptions["route"]): string {
+  if (!route) {
+    return baseUrl;
+  }
+  return new URL(route, baseUrl).toString();
+}
+
+async function resolveDashboardTarget(route?: DashboardOptions["route"]) {
   const snapshot = await readConfigFileSnapshot();
   const cfg = snapshot.valid ? (snapshot.sourceConfig ?? snapshot.config) : {};
   const port = resolveGatewayPort(cfg);
@@ -39,12 +47,13 @@ async function resolveDashboardTarget() {
     basePath,
     tlsEnabled: cfg.gateway?.tls?.enabled === true,
   });
+  const routedHttpUrl = appendDashboardRoute(links.httpUrl, route);
   // Avoid embedding externally managed SecretRef tokens in terminal/clipboard/browser args.
   const includeTokenInUrl = token.length > 0 && !resolvedToken.secretRefConfigured;
   // Prefer URL fragment to avoid leaking auth tokens via query params.
   const dashboardUrl = includeTokenInUrl
-    ? `${links.httpUrl}#token=${encodeURIComponent(token)}`
-    : links.httpUrl;
+    ? `${routedHttpUrl}#token=${encodeURIComponent(token)}`
+    : routedHttpUrl;
 
   return {
     port,
@@ -54,6 +63,7 @@ async function resolveDashboardTarget() {
     token,
     includeTokenInUrl,
     dashboardUrl,
+    routedHttpUrl,
   };
 }
 
@@ -61,7 +71,7 @@ export async function dashboardCommand(
   runtime: RuntimeEnv = defaultRuntime,
   options: DashboardOptions = {},
 ) {
-  const initialTarget = await resolveDashboardTarget();
+  const initialTarget = await resolveDashboardTarget(options.route);
   const readiness = await ensureGatewayReadyForOperation({
     runtime,
     operation: "open the dashboard",
@@ -73,10 +83,11 @@ export async function dashboardCommand(
     return;
   }
 
-  const target = readiness.recovered ? await resolveDashboardTarget() : initialTarget;
-  const { port, basePath, links, resolvedToken, token, includeTokenInUrl, dashboardUrl } = target;
+  const target = readiness.recovered ? await resolveDashboardTarget(options.route) : initialTarget;
+  const { port, basePath, resolvedToken, token, includeTokenInUrl, dashboardUrl, routedHttpUrl } =
+    target;
 
-  runtime.log(`Dashboard URL: ${links.httpUrl}`);
+  runtime.log(`Dashboard URL: ${routedHttpUrl}`);
   if (includeTokenInUrl) {
     runtime.log("Token auto-auth included in browser/clipboard URL.");
   }

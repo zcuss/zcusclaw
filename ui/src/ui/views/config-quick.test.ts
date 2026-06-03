@@ -74,7 +74,11 @@ function createProps(overrides: Partial<QuickSettingsProps> = {}): QuickSettings
     onUserAvatarChange: vi.fn(),
     configObject: {},
     onSelectPreset: vi.fn(),
+    onResetConfig: vi.fn(),
+    onSaveConfig: vi.fn(),
+    onApplyConfig: vi.fn(),
     onAdvancedSettings: vi.fn(),
+    onConfigureMenu: vi.fn(),
     connected: true,
     gatewayUrl: "ws://localhost:18789",
     assistantName: "OpenClaw",
@@ -119,7 +123,7 @@ describe("renderQuickSettings", () => {
   it("uses direct dashboard cards for the compact settings layout", () => {
     const container = document.createElement("div");
 
-    render(renderQuickSettings(createProps()), container);
+    render(renderQuickSettings(createProps({ onConfigureMenu: undefined })), container);
 
     expect(collectQuickSettingsCardKinds(container)).toEqual([
       "qs-card--model",
@@ -133,6 +137,43 @@ describe("renderQuickSettings", () => {
     expect(container.querySelectorAll(".qs-card--span-all")).toHaveLength(1);
   });
 
+  it("renders the configure menu and forwards section clicks", () => {
+    const onConfigureMenu = vi.fn();
+    const container = document.createElement("div");
+
+    render(renderQuickSettings(createProps({ onConfigureMenu })), container);
+
+    expect(collectQuickSettingsCardKinds(container)).toContain("qs-card--configure-menu");
+    const buttons = container.querySelectorAll(".qs-card--configure-menu button");
+    expect(buttons).toHaveLength(11);
+
+    const workspaceButton = Array.from(buttons).find(
+      (candidate) =>
+        candidate.querySelector(".qs-list-item__title")?.textContent?.trim() === "Workspace",
+    );
+    expect(workspaceButton).toBeInstanceOf(HTMLButtonElement);
+    (workspaceButton as HTMLButtonElement).click();
+    expect(onConfigureMenu).toHaveBeenCalledWith("workspace");
+  });
+
+  it("renders the configure menu when onConfigureMenu is provided", () => {
+    const onConfigureMenu = vi.fn();
+    const container = document.createElement("div");
+
+    render(renderQuickSettings(createProps({ onConfigureMenu })), container);
+
+    expect(collectQuickSettingsCardKinds(container)).toContain("qs-card--configure-menu");
+    const buttons = container.querySelectorAll(".qs-card--configure-menu button");
+    expect(buttons).toHaveLength(11);
+
+    const workspaceButton = Array.from(buttons).find(
+      (btn) => btn.querySelector(".qs-list-item__title")?.textContent?.trim() === "Workspace",
+    );
+    expect(workspaceButton).toBeDefined();
+    (workspaceButton as HTMLButtonElement).click();
+    expect(onConfigureMenu).toHaveBeenCalledWith("workspace");
+  });
+
   it("shows the current bootstrap default when config omits the explicit limit", () => {
     const container = document.createElement("div");
 
@@ -143,8 +184,8 @@ describe("renderQuickSettings", () => {
         candidate.querySelector(".qs-profile-stat__label")?.textContent?.trim() ===
         "Bootstrap Per File",
     );
-    expect(stat?.querySelector(".qs-profile-stat__value")?.textContent?.trim()).toBe(
-      "20,000 chars",
+    expect(stat?.querySelector(".qs-profile-stat__value")?.textContent?.trim()).toMatch(
+      /^20[,.]000 chars$/,
     );
   });
 

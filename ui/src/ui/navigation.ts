@@ -11,7 +11,7 @@ export const TAB_GROUPS = [
   { label: "agent", tabs: ["agents", "skills", "skillWorkshop", "nodes", "dreams"] },
   {
     label: "settings",
-    tabs: ["config"],
+    tabs: ["config", "configure"],
   },
 ] as const;
 
@@ -30,6 +30,7 @@ export type Tab =
   | "nodes"
   | "chat"
   | "config"
+  | "configure"
   | "communications"
   | "appearance"
   | "automation"
@@ -42,6 +43,7 @@ export type Tab =
 
 export const SETTINGS_TABS = [
   "config",
+  "configure",
   "channels",
   "communications",
   "appearance",
@@ -68,6 +70,7 @@ const TAB_PATHS: Record<Tab, string> = {
   nodes: "/nodes",
   chat: "/chat",
   config: "/config",
+  configure: "/configure",
   communications: "/communications",
   appearance: "/appearance",
   automation: "/automation",
@@ -226,6 +229,8 @@ export function iconForTab(tab: Tab): IconName {
       return "monitor";
     case "config":
       return "settings";
+    case "configure":
+      return "wrench";
     case "communications":
       return "send";
     case "appearance":
@@ -253,9 +258,15 @@ export function titleForTab(tab: Tab) {
   if (tab === "config") {
     return t("nav.settings");
   }
+  if (tab === "configure") {
+    return "Configure";
+  }
   return t(`tabs.${tab}`);
 }
 
 export function subtitleForTab(tab: Tab) {
+  if (tab === "configure") {
+    return "Run guided setup flows from the dashboard";
+  }
   return t(`subtitles.${tab}`);
 }

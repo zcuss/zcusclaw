@@ -128,6 +128,19 @@ describe("dashboardCommand", () => {
     );
   });
 
+  it("opens and copies the settings route when requested", async () => {
+    mockSnapshot("abc123");
+    copyToClipboardMock.mockResolvedValue(true);
+    detectBrowserOpenSupportMock.mockResolvedValue({ ok: true });
+    openUrlMock.mockResolvedValue(true);
+
+    await dashboardCommand(runtime, { route: "config" });
+
+    expect(copyToClipboardMock).toHaveBeenCalledWith("http://127.0.0.1:18789/config#token=abc123");
+    expect(openUrlMock).toHaveBeenCalledWith("http://127.0.0.1:18789/config#token=abc123");
+    expect(runtime.log).toHaveBeenCalledWith("Dashboard URL: http://127.0.0.1:18789/config");
+  });
+
   it("never logs the gateway token in the dashboard URL (CVE regression)", async () => {
     const secretToken = "super-secret-bearer-token";
     mockSnapshot(secretToken);

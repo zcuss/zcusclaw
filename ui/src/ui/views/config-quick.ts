@@ -106,6 +106,20 @@ export type QuickSettingsProps = {
 
   // Navigation
   onAdvancedSettings?: () => void;
+  onConfigureMenu?: (
+    section:
+      | "workspace"
+      | "model"
+      | "web"
+      | "gateway"
+      | "dashboard"
+      | "daemon"
+      | "channels"
+      | "plugins"
+      | "skills"
+      | "health"
+      | "skip",
+  ) => void;
 
   // Connection
   connected: boolean;
@@ -1074,6 +1088,81 @@ function renderConnectionFooter(props: QuickSettingsProps) {
 
 // ── Main render ──
 
+function renderConfigureMenu(props: QuickSettingsProps) {
+  if (!props.onConfigureMenu) return nothing;
+
+  const menuItems = [
+    { id: "workspace", label: "Workspace", hint: "Set workspace + sessions", icon: icons.folder },
+    { id: "model", label: "Model", hint: "Pick provider + credentials", icon: icons.brain },
+    {
+      id: "web",
+      label: "Web tools",
+      hint: "Configure web search (Perplexity/Brave) + fetch",
+      icon: icons.globe,
+    },
+    { id: "gateway", label: "Gateway", hint: "Port, bind, auth, tailscale", icon: icons.radio },
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      hint: "Open the dashboard configure UI",
+      icon: icons.monitor,
+    },
+    {
+      id: "daemon",
+      label: "Daemon",
+      hint: "Install/manage the background service",
+      icon: icons.terminal,
+    },
+    {
+      id: "channels",
+      label: "Channels",
+      hint: "Link WhatsApp/Telegram/etc and defaults",
+      icon: icons.link,
+    },
+    {
+      id: "plugins",
+      label: "Plugins",
+      hint: "Configure plugin settings (sandbox, tools, etc.)",
+      icon: icons.zap,
+    },
+    { id: "skills", label: "Skills", hint: "Install/enable workspace skills", icon: icons.wrench },
+    {
+      id: "health",
+      label: "Health check",
+      hint: "Run gateway + channel checks",
+      icon: icons.activity,
+    },
+    { id: "skip", label: "Skip for now", hint: "Return to overview", icon: icons.chevronRight },
+  ] as const;
+
+  return html`
+    <div class="qs-card qs-card--span-all qs-card--configure-menu">
+      <div class="qs-card__header">
+        <h3 class="qs-card__title">${icons.settings} What do you want to configure?</h3>
+      </div>
+      <div class="qs-card__body" style="padding: 0;">
+        <div class="qs-list">
+          ${menuItems.map(
+            (item) => html`
+              <button
+                class="qs-list-item"
+                style="width: 100%; text-align: left; border: none; background: transparent; cursor: pointer;"
+                @click=${() => props.onConfigureMenu?.(item.id)}
+              >
+                <div class="qs-list-item__icon">${item.icon}</div>
+                <div class="qs-list-item__content">
+                  <div class="qs-list-item__title">${item.label}</div>
+                  <div class="qs-list-item__subtitle">${item.hint}</div>
+                </div>
+              </button>
+            `,
+          )}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 export function renderQuickSettings(props: QuickSettingsProps) {
   return html`
     <div class="qs-container">
@@ -1085,8 +1174,8 @@ export function renderQuickSettings(props: QuickSettingsProps) {
       </div>
 
       <div class="qs-grid">
-        ${renderModelCard(props)} ${renderChannelsCard(props)} ${renderSecurityCard(props)}
-        ${renderPersonalCard(props)}
+        ${renderConfigureMenu(props)} ${renderModelCard(props)} ${renderChannelsCard(props)}
+        ${renderSecurityCard(props)} ${renderPersonalCard(props)}
         <div class="qs-side-stack">
           ${renderAppearanceCard(props)} ${renderAutomationsCard(props)}
         </div>

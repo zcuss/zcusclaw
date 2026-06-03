@@ -1488,11 +1488,72 @@ export function renderApp(state: AppViewState) {
     state.aiAgentsActiveSubsection,
     AI_AGENTS_SECTION_KEYS,
   );
+  const openConfigureMenuSection = (
+    section:
+      | "workspace"
+      | "model"
+      | "web"
+      | "gateway"
+      | "dashboard"
+      | "daemon"
+      | "channels"
+      | "plugins"
+      | "skills"
+      | "health"
+      | "skip",
+  ) => {
+    const openAdvancedConfigSection = (configSection: string) => {
+      state.configSettingsMode = "advanced";
+      state.configActiveSection = configSection;
+      state.configActiveSubsection = null;
+      state.setTab("config");
+      requestHostUpdate?.();
+    };
+
+    switch (section) {
+      case "workspace":
+        state.setTab("sessions");
+        return;
+      case "model":
+        state.aiAgentsActiveSection = "models";
+        state.setTab("aiAgents");
+        return;
+      case "web":
+        openAdvancedConfigSection("web");
+        return;
+      case "gateway":
+        openAdvancedConfigSection("gateway");
+        return;
+      case "dashboard":
+        openAdvancedConfigSection("ui");
+        return;
+      case "daemon":
+        state.setTab("infrastructure");
+        return;
+      case "channels":
+        state.setTab("channels");
+        return;
+      case "plugins":
+        openAdvancedConfigSection("plugins");
+        return;
+      case "skills":
+        state.setTab("skills");
+        return;
+      case "health":
+        state.setTab("debug");
+        return;
+      case "skip":
+        state.setTab("overview");
+        return;
+    }
+  };
+
   const renderConfigTabForActiveTab = () => {
     switch (state.tab) {
-      case "config": {
+      case "config":
+      case "configure": {
         // Quick Settings mode — opinionated card layout
-        if (state.configSettingsMode === "quick") {
+        if (state.tab === "configure" || state.configSettingsMode === "quick") {
           const configObj = state.configForm ?? state.configSnapshot?.config ?? {};
           const assistantAvatarOverride =
             localAssistantAvatarOverride ?? resolveAssistantAvatarOverride(configObj);
@@ -1635,8 +1696,10 @@ export function renderApp(state: AppViewState) {
             onApplyConfig: () => void applyConfig(state),
             onAdvancedSettings: () => {
               state.configSettingsMode = "advanced";
+              state.setTab("config");
               requestHostUpdate?.();
             },
+            onConfigureMenu: openConfigureMenuSection,
             connected: state.connected,
             gatewayUrl: state.settings.gatewayUrl,
             assistantName: state.assistantName,

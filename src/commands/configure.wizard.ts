@@ -670,7 +670,7 @@ export async function runConfigureWizard(
 
       if (selected.includes("dashboard")) {
         const { dashboardCommand } = await import("./dashboard.js");
-        await dashboardCommand(runtime);
+        await dashboardCommand(runtime, { route: "config" });
       }
 
       if (selected.includes("channels")) {
@@ -740,7 +740,7 @@ export async function runConfigureWizard(
 
         if (choice === "dashboard") {
           const { dashboardCommand } = await import("./dashboard.js");
-          await dashboardCommand(runtime);
+          await dashboardCommand(runtime, { route: "config" });
         }
 
         if (choice === "channels") {

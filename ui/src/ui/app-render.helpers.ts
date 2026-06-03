@@ -202,7 +202,12 @@ const NEW_CHAT_CREATE_FAILED_MESSAGE =
 
 export function renderTab(state: AppViewState, tab: Tab, opts?: { collapsed?: boolean }) {
   const href = pathForTab(tab, state.basePath);
-  const isActive = tab === "config" ? isSettingsTab(state.tab) : state.tab === tab;
+  const isActive =
+    tab === "configure"
+      ? state.tab === "configure"
+      : tab === "config"
+        ? isSettingsTab(state.tab) && state.tab !== "configure"
+        : state.tab === tab;
   const collapsed = opts?.collapsed ?? state.settings.navCollapsed;
   return html`
     <a
