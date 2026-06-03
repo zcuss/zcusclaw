@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/channel-nextcloud-talk",
+  "name": "zcusclaw-channel-nextcloud-talk",
   "version": "2026.6.2",
   "description": "OpenClaw Nextcloud Talk channel plugin for conversations.",
   "repository": {
@@ -39,7 +39,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@zcuss/channel-nextcloud-talk",
+      "npmSpec": "zcusclaw-channel-nextcloud-talk",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -58,6 +58,7 @@
     "zod": "4.4.3"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }

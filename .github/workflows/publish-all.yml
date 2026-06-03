@@ -1,4 +1,4 @@
-name: Publish All to GitHub Packages
+name: Publish All to npmjs
 
 on:
   push:
@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,8 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@zcuss'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
         run: corepack enable && pnpm --version
@@ -45,20 +43,20 @@ jobs:
         run: |
           CORE_NAME=$(node -p "require('./package.json').name")
           CORE_VERSION=$(node -p "require('./package.json').version")
-          if npm view "${CORE_NAME}@${CORE_VERSION}" version --registry=https://npm.pkg.github.com 2>/dev/null; then
+          if npm view "${CORE_NAME}@${CORE_VERSION}" version --registry=https://registry.npmjs.org 2>/dev/null; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "::notice::${CORE_NAME}@${CORE_VERSION} already published, skipping."
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Core Package
         if: steps.check-core.outputs.skip != 'true'
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-addons:
     needs: publish-core
@@ -98,8 +96,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@zcuss'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
         run: corepack enable && pnpm --version
@@ -115,20 +112,18 @@ jobs:
         run: |
           ADDON_NAME=$(node -p "require('./${{ matrix.addon }}/package.json').name")
           ADDON_VERSION=$(node -p "require('./${{ matrix.addon }}/package.json').version")
-          if npm view "${ADDON_NAME}@${ADDON_VERSION}" version --registry=https://npm.pkg.github.com 2>/dev/null; then
+          if npm view "${ADDON_NAME}@${ADDON_VERSION}" version --registry=https://registry.npmjs.org 2>/dev/null; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "::notice::${ADDON_NAME}@${ADDON_VERSION} already published, skipping."
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Addon Package
         if: steps.check-addon.outputs.skip != 'true'
         run: |
-          echo "@zcuss:registry=https://npm.pkg.github.com" > .npmrc
-          echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
           bash scripts/plugin-npm-publish.sh --publish ${{ matrix.addon }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

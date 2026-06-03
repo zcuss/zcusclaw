@@ -1,10 +1,11 @@
 {
-  "name": "@zcuss/channel-irc",
+  "name": "zcusclaw-channel-irc",
   "version": "2026.6.2",
   "description": "OpenClaw IRC channel plugin",
   "type": "module",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "devDependencies": {
     "@openclaw/plugin-sdk": "workspace:*"
@@ -15,7 +16,7 @@
     ],
     "install": {
       "defaultChoice": "npm",
-      "npmSpec": "@zcuss/channel-irc",
+      "npmSpec": "zcusclaw-channel-irc",
       "minHostVersion": ">=2026.4.10"
     },
     "setupEntry": "./setup-entry.ts",

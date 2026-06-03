@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/channel-zalo",
+  "name": "zcusclaw-channel-zalo",
   "version": "2026.6.2",
   "description": "OpenClaw Zalo channel plugin for bot and webhook chats.",
   "repository": {
@@ -38,7 +38,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@zcuss/channel-zalo",
+      "npmSpec": "zcusclaw-channel-zalo",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -57,6 +57,7 @@
     "zod": "4.4.3"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
