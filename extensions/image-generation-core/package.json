@@ -1,10 +1,18 @@
 {
-  "name": "@openclaw/image-generation-core",
+  "name": "zcusclaw-addon-image-generation-core",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw image generation runtime package",
   "type": "module",
   "devDependencies": {
     "@openclaw/plugin-sdk": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "openclaw": {
+    "release": {
+      "publishToNpm": true
+    }
   }
 }

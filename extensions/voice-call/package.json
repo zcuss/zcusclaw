@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/voice-call",
+  "name": "zcusclaw-addon-voice-call",
   "version": "2026.6.2",
   "description": "OpenClaw voice-call plugin for Twilio, Telnyx, and Plivo phone calls.",
   "repository": {
@@ -30,7 +30,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/voice-call",
+      "npmSpec": "zcusclaw-addon-voice-call",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.10"
     },
@@ -44,5 +44,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

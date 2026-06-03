@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/diagnostics-otel",
+  "name": "zcusclaw-addon-diagnostics-otel",
   "version": "2026.6.2",
   "description": "OpenClaw diagnostics OpenTelemetry exporter for metrics and traces.",
   "repository": {
@@ -29,7 +29,7 @@
     ],
     "install": {
       "clawhubSpec": "clawhub:@openclaw/diagnostics-otel",
-      "npmSpec": "@openclaw/diagnostics-otel",
+      "npmSpec": "zcusclaw-addon-diagnostics-otel",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.25"
     },
@@ -43,5 +43,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

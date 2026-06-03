@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/anthropic-vertex-provider",
+  "name": "zcusclaw-provider-anthropic-vertex",
   "version": "2026.6.2",
   "description": "OpenClaw Anthropic Vertex provider plugin for Claude models on Google Vertex AI.",
   "repository": {
@@ -18,7 +18,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/anthropic-vertex-provider",
+      "npmSpec": "zcusclaw-provider-anthropic-vertex",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.12-beta.1"
     },
@@ -33,5 +33,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

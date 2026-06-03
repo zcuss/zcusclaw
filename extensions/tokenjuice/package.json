@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/tokenjuice",
+  "name": "zcusclaw-addon-tokenjuice",
   "version": "2026.6.2",
   "description": "OpenClaw tokenjuice exec output compaction plugin",
   "repository": {
@@ -28,7 +28,7 @@
     ],
     "install": {
       "clawhubSpec": "clawhub:@openclaw/tokenjuice",
-      "npmSpec": "@openclaw/tokenjuice",
+      "npmSpec": "zcusclaw-addon-tokenjuice",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.28"
     },
@@ -43,5 +43,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

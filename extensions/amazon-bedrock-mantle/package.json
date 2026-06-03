@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/amazon-bedrock-mantle-provider",
+  "name": "zcusclaw-provider-amazon-bedrock-mantle",
   "version": "2026.6.2",
   "description": "OpenClaw Amazon Bedrock Mantle provider plugin for OpenAI-compatible model routing.",
   "repository": {
@@ -19,7 +19,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/amazon-bedrock-mantle-provider",
+      "npmSpec": "zcusclaw-provider-amazon-bedrock-mantle",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.12-beta.1"
     },
@@ -34,5 +34,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/file-transfer",
+  "name": "zcusclaw-addon-file-transfer",
   "version": "2026.6.2",
   "description": "OpenClaw file transfer plugin (file_fetch, dir_list, dir_fetch, file_write)",
   "type": "module",
@@ -13,6 +13,13 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

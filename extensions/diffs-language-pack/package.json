@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/diffs-language-pack",
+  "name": "zcusclaw-addon-diffs-language-pack",
   "version": "2026.6.2",
   "description": "OpenClaw diffs viewer syntax highlighting language pack",
   "repository": {
@@ -15,7 +15,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/diffs-language-pack",
+      "npmSpec": "zcusclaw-addon-diffs-language-pack",
       "clawhubSpec": "clawhub:@openclaw/diffs-language-pack",
       "localPath": "extensions/diffs-language-pack",
       "defaultChoice": "npm",
@@ -40,5 +40,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

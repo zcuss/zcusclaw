@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/huggingface-provider",
+  "name": "zcusclaw-provider-huggingface",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw Hugging Face provider plugin",
   "type": "module",
   "devDependencies": {
@@ -10,6 +9,13 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

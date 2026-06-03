@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/openshell-sandbox",
+  "name": "zcusclaw-addon-openshell-sandbox",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/openshell-sandbox",
+      "name": "zcusclaw-addon-openshell-sandbox",
       "version": "2026.6.2",
       "dependencies": {
         "zod": "4.4.3"

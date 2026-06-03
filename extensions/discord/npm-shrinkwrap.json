@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/discord",
+  "name": "zcusclaw-addon-discord",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/discord",
+      "name": "zcusclaw-addon-discord",
       "version": "2026.6.2",
       "dependencies": {
         "@discordjs/voice": "0.19.2",

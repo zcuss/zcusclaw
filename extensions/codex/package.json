@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/codex",
+  "name": "zcusclaw-addon-codex",
   "version": "2026.6.2",
   "description": "OpenClaw Codex app-server harness and model provider plugin with a Codex-managed GPT catalog.",
   "repository": {
@@ -21,7 +21,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/codex",
+      "npmSpec": "zcusclaw-addon-codex",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.1-beta.1"
     },
@@ -36,5 +36,9 @@
       "publishToNpm": true,
       "bundleRuntimeDependencies": false
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

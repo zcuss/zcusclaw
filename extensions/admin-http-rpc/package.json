@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/admin-http-rpc",
+  "name": "zcusclaw-addon-admin-http-rpc",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw admin HTTP RPC endpoint",
   "type": "module",
   "devDependencies": {
@@ -10,6 +9,13 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

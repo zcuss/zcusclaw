@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/qa-channel",
+  "name": "zcusclaw-addon-qa-channel",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw QA synthetic channel plugin",
   "type": "module",
   "exports": {
@@ -46,6 +45,13 @@
         "setup": false,
         "docs": false
       }
+    },
+    "release": {
+      "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

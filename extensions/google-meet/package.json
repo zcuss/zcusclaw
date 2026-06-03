@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/google-meet",
+  "name": "zcusclaw-addon-google-meet",
   "version": "2026.6.2",
   "description": "OpenClaw Google Meet participant plugin for joining calls through Chrome or Twilio transports.",
   "repository": {
@@ -28,7 +28,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/google-meet",
+      "npmSpec": "zcusclaw-addon-google-meet",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.20"
     },
@@ -42,5 +42,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

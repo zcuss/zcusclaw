@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/openshell-sandbox",
+  "name": "zcusclaw-addon-openshell-sandbox",
   "version": "2026.6.2",
   "description": "OpenClaw sandbox backend for the NVIDIA OpenShell CLI with mirrored local workspaces and SSH command execution.",
   "repository": {
@@ -18,7 +18,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/openshell-sandbox",
+      "npmSpec": "zcusclaw-addon-openshell-sandbox",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.12-beta.1"
     },
@@ -33,5 +33,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

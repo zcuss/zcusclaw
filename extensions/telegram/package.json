@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/telegram",
+  "name": "zcusclaw-addon-telegram",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw Telegram channel plugin",
   "type": "module",
   "dependencies": {
@@ -51,6 +50,13 @@
         "specifier": "./configured-state",
         "exportName": "hasTelegramConfiguredState"
       }
+    },
+    "release": {
+      "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

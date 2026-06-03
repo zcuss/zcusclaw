@@ -1,12 +1,18 @@
 {
-  "name": "@openclaw/lmstudio-provider",
+  "name": "zcusclaw-provider-lmstudio",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw LM Studio provider plugin",
   "type": "module",
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

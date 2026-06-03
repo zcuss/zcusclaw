@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/acpx",
+  "name": "zcusclaw-addon-acpx",
   "version": "2026.6.2",
   "description": "OpenClaw ACP runtime backend with plugin-owned session and transport management.",
   "repository": {
@@ -21,7 +21,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/acpx",
+      "npmSpec": "zcusclaw-addon-acpx",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.25"
     },
@@ -46,5 +46,9 @@
       "publishToNpm": true,
       "bundleRuntimeDependencies": false
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

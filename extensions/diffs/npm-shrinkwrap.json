@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/diffs",
+  "name": "zcusclaw-addon-diffs",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/diffs",
+      "name": "zcusclaw-addon-diffs",
       "version": "2026.6.2",
       "dependencies": {
         "@pierre/diffs": "1.2.4",

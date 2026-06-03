@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/anthropic-vertex-provider",
+  "name": "zcusclaw-provider-anthropic-vertex",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/anthropic-vertex-provider",
+      "name": "zcusclaw-provider-anthropic-vertex",
       "version": "2026.6.2",
       "dependencies": {
         "@anthropic-ai/vertex-sdk": "0.16.1"

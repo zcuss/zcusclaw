@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/tokenjuice",
+  "name": "zcusclaw-addon-tokenjuice",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/tokenjuice",
+      "name": "zcusclaw-addon-tokenjuice",
       "version": "2026.6.2",
       "dependencies": {
         "tokenjuice": "0.8.0"

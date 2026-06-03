@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/acpx",
+  "name": "zcusclaw-addon-acpx",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/acpx",
+      "name": "zcusclaw-addon-acpx",
       "version": "2026.6.2",
       "dependencies": {
         "@agentclientprotocol/claude-agent-acp": "0.39.0",

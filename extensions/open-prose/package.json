@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/open-prose",
+  "name": "zcusclaw-addon-open-prose",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenProse VM skill pack plugin (slash command + telemetry).",
   "type": "module",
   "devDependencies": {
@@ -10,6 +9,13 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

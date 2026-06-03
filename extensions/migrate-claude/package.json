@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/migrate-claude",
+  "name": "zcusclaw-addon-migrate-claude",
   "version": "2026.6.2",
-  "private": true,
   "description": "Claude to OpenClaw migration provider",
   "type": "module",
   "devDependencies": {
@@ -19,6 +18,13 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

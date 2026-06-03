@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/copilot",
+  "name": "zcusclaw-addon-copilot",
   "version": "2026.6.2",
   "description": "OpenClaw GitHub Copilot agent runtime plugin (registers a `github-copilot` AgentHarness backed by @github/copilot-sdk over JSON-RPC to the GitHub Copilot CLI)",
   "repository": {
@@ -20,7 +20,7 @@
     ],
     "install": {
       "clawhubSpec": "clawhub:@openclaw/copilot",
-      "npmSpec": "@openclaw/copilot",
+      "npmSpec": "zcusclaw-addon-copilot",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.28"
     },
@@ -36,5 +36,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

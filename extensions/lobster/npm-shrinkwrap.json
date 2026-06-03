@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/lobster",
+  "name": "zcusclaw-addon-lobster",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/lobster",
+      "name": "zcusclaw-addon-lobster",
       "version": "2026.6.2",
       "dependencies": {
         "@clawdbot/lobster": "2026.5.22",

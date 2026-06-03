@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/canvas-plugin",
+  "name": "zcusclaw-plugin-canvas",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw Canvas plugin",
   "type": "module",
   "devDependencies": {
@@ -22,6 +21,13 @@
     "assetScripts": {
       "build": "node scripts/bundle-a2ui.mjs",
       "copy": "node scripts/copy-a2ui.mjs"
+    },
+    "release": {
+      "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

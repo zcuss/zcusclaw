@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/memory-lancedb",
+  "name": "zcusclaw-addon-memory-lancedb",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/memory-lancedb",
+      "name": "zcusclaw-addon-memory-lancedb",
       "version": "2026.6.2",
       "dependencies": {
         "@lancedb/lancedb": "0.30.0",

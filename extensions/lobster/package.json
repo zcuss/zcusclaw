@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/lobster",
+  "name": "zcusclaw-addon-lobster",
   "version": "2026.6.2",
   "description": "Lobster workflow tool plugin for typed pipelines and resumable approvals.",
   "repository": {
@@ -19,7 +19,7 @@
       "./index.ts"
     ],
     "install": {
-      "npmSpec": "@openclaw/lobster",
+      "npmSpec": "zcusclaw-addon-lobster",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.4.25"
     },
@@ -33,5 +33,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

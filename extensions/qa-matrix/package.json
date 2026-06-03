@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/qa-matrix",
+  "name": "zcusclaw-addon-qa-matrix",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw Matrix QA runner plugin",
   "type": "module",
   "dependencies": {
@@ -26,6 +25,13 @@
     ],
     "compat": {
       "pluginApi": ">=2026.6.2"
+    },
+    "release": {
+      "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

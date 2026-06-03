@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/pixverse-provider",
+  "name": "zcusclaw-provider-pixverse",
   "version": "2026.6.2",
   "description": "OpenClaw PixVerse video generation provider plugin.",
   "repository": {
@@ -25,7 +25,7 @@
     ],
     "install": {
       "clawhubSpec": "clawhub:@openclaw/pixverse-provider",
-      "npmSpec": "@openclaw/pixverse-provider",
+      "npmSpec": "zcusclaw-provider-pixverse",
       "defaultChoice": "npm",
       "minHostVersion": ">=2026.5.26"
     },
@@ -40,5 +40,9 @@
       "publishToClawHub": true,
       "publishToNpm": true
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

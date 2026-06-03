@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/google-meet",
+  "name": "zcusclaw-addon-google-meet",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/google-meet",
+      "name": "zcusclaw-addon-google-meet",
       "version": "2026.6.2",
       "dependencies": {
         "commander": "14.0.3",

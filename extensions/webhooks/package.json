@@ -1,7 +1,6 @@
 {
-  "name": "@openclaw/webhooks",
+  "name": "zcusclaw-addon-webhooks",
   "version": "2026.6.2",
-  "private": true,
   "description": "OpenClaw webhook bridge plugin",
   "type": "module",
   "devDependencies": {
@@ -10,9 +9,16 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "release": {
+      "publishToNpm": true
+    }
   },
   "dependencies": {
     "zod": "4.4.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

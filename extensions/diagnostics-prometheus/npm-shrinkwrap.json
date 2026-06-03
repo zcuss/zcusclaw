@@ -1,11 +1,11 @@
 {
-  "name": "@openclaw/diagnostics-prometheus",
+  "name": "zcusclaw-addon-diagnostics-prometheus",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@openclaw/diagnostics-prometheus",
+      "name": "zcusclaw-addon-diagnostics-prometheus",
       "version": "2026.6.2"
     }
   }
