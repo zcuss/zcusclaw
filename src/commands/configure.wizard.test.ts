@@ -32,6 +32,7 @@ const mocks = vi.hoisted(() => {
       ...cfg,
       gateway: { mode: "remote", remote: { url: "wss://gateway.example.test" } },
     })),
+    dashboardCommand: vi.fn(),
     isCodexNativeWebSearchRelevant: vi.fn(({ config }: { config: OpenClawConfig }) =>
       Boolean(config.auth?.profiles?.["openai:default"]),
     ),
@@ -81,6 +82,10 @@ vi.mock("./onboard-helpers.js", () => ({
 
 vi.mock("./health.js", () => ({
   healthCommand: vi.fn(),
+}));
+
+vi.mock("./dashboard.js", () => ({
+  dashboardCommand: mocks.dashboardCommand,
 }));
 
 vi.mock("./health-format.js", () => ({
@@ -352,6 +357,14 @@ describe("runConfigureWizard", () => {
     expect(mocks.ensureControlUiAssetsBuilt).not.toHaveBeenCalled();
     expect(mocks.resolveControlUiLinks).not.toHaveBeenCalled();
     expect(requireWriteConfig().gateway).toBeUndefined();
+  });
+
+  it("runs the dashboard command when the dashboard section is selected", async () => {
+    setupBaseWizardState();
+
+    await runConfigureWizard({ command: "configure", sections: ["dashboard"] }, createRuntime());
+
+    expect(mocks.dashboardCommand).toHaveBeenCalledOnce();
   });
 
   it("runs model-only configure for existing remote Gateway configs", async () => {

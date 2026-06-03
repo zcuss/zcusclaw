@@ -17,6 +17,7 @@ export const CONFIGURE_WIZARD_SECTIONS = [
   "model",
   "web",
   "gateway",
+  "dashboard",
   "daemon",
   "channels",
   "plugins",
@@ -58,6 +59,11 @@ export const CONFIGURE_SECTION_OPTIONS: Array<{
   { value: "model", label: "Model", hint: "Pick provider + credentials" },
   { value: "web", label: "Web tools", hint: "Configure web search (Perplexity/Brave) + fetch" },
   { value: "gateway", label: "Gateway", hint: "Port, bind, auth, tailscale" },
+  {
+    value: "dashboard",
+    label: "Dashboard",
+    hint: "Open the dashboard configure UI",
+  },
   {
     value: "daemon",
     label: "Daemon",

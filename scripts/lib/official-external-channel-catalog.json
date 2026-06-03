@@ -130,10 +130,10 @@
         "channel": {
           "id": "feishu",
           "label": "Feishu",
-          "selectionLabel": "Feishu/Lark (Ã©Â£Å¾Ã¤Â¹Â¦)",
+          "selectionLabel": "Feishu/Lark",
           "docsPath": "/channels/feishu",
           "docsLabel": "feishu",
-          "blurb": "Ã©Â£Å¾Ã¤Â¹Â¦/Lark enterprise messaging with doc/wiki/drive tools.",
+          "blurb": "Feishu/Lark enterprise messaging with doc/wiki/drive tools.",
           "aliases": ["lark"],
           "order": 35,
           "quickstartAllowFrom": true

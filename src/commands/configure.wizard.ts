@@ -668,6 +668,11 @@ export async function runConfigureWizard(
         gatewayPort = gateway.port;
       }
 
+      if (selected.includes("dashboard")) {
+        const { dashboardCommand } = await import("./dashboard.js");
+        await dashboardCommand(runtime);
+      }
+
       if (selected.includes("channels")) {
         await configureChannelsSection();
       }
@@ -731,6 +736,11 @@ export async function runConfigureWizard(
           gatewayPort = gateway.port;
           didConfigureGateway = true;
           await persistConfig();
+        }
+
+        if (choice === "dashboard") {
+          const { dashboardCommand } = await import("./dashboard.js");
+          await dashboardCommand(runtime);
         }
 
         if (choice === "channels") {
