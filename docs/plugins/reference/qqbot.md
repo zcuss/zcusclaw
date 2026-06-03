@@ -1,4 +1,4 @@
----
+﻿---
 summary: "OpenClaw QQ Bot channel plugin for group and direct-message workflows."
 read_when:
   - You are installing, configuring, or auditing the qqbot plugin
@@ -11,7 +11,7 @@ OpenClaw QQ Bot channel plugin for group and direct-message workflows.
 
 ## Distribution
 
-- Package: `@zcuss/channel-qqbot`
+- Package: `zcusclaw-channel-qqbot`
 - Install route: npm; ClawHub
 
 ## Surface

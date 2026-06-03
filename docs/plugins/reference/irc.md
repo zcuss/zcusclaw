@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Adds the IRC channel surface for sending and receiving OpenClaw messages."
 read_when:
   - You are installing, configuring, or auditing the irc plugin
@@ -11,7 +11,7 @@ Adds the IRC channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/channel-irc`
+- Package: `zcusclaw-channel-irc`
 - Install route: included in OpenClaw
 
 ## Surface

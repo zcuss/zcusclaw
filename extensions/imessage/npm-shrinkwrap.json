@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-imessage",
+  "name": "zcusclaw-channel-imessage",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-imessage",
+      "name": "zcusclaw-channel-imessage",
       "version": "2026.6.2"
     }
   }

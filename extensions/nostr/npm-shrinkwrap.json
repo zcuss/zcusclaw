@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-nostr",
+  "name": "zcusclaw-channel-nostr",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-nostr",
+      "name": "zcusclaw-channel-nostr",
       "version": "2026.6.2",
       "dependencies": {
         "nostr-tools": "2.23.5",

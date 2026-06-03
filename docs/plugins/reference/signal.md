@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Adds the Signal channel surface for sending and receiving OpenClaw messages."
 read_when:
   - You are installing, configuring, or auditing the signal plugin
@@ -11,7 +11,7 @@ Adds the Signal channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/channel-signal`
+- Package: `zcusclaw-channel-signal`
 - Install route: included in OpenClaw
 
 ## Surface

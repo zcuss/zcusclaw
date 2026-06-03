@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-feishu",
+  "name": "zcusclaw-channel-feishu",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-feishu",
+      "name": "zcusclaw-channel-feishu",
       "version": "2026.6.2",
       "dependencies": {
         "@larksuiteoapi/node-sdk": "1.66.0",

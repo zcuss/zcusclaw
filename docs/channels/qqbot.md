@@ -1,4 +1,4 @@
----
+﻿---
 summary: "QQ Bot setup, config, and usage"
 read_when:
   - You want to connect OpenClaw to QQ
@@ -19,7 +19,7 @@ media are supported. Reactions and threads are not supported.
 Install QQ Bot before setup:
 
 ```bash
-openclaw plugins install @zcuss/channel-qqbot
+openclaw plugins install zcusclaw-channel-qqbot
 ```
 
 ## Setup
@@ -29,7 +29,7 @@ openclaw plugins install @zcuss/channel-qqbot
 2. Click **Create Bot** to create a new QQ bot.
 3. Find **AppID** and **AppSecret** on the bot's settings page and copy them.
 
-> AppSecret is not stored in plaintext — if you leave the page without saving it,
+> AppSecret is not stored in plaintext â€” if you leave the page without saving it,
 > you'll have to regenerate a new one.
 
 4. Add the channel:

@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Mattermost bot setup and OpenClaw config"
 read_when:
   - Setting up Mattermost
@@ -16,7 +16,7 @@ Install Mattermost before configuring the channel:
 <Tabs>
   <Tab title="npm registry">
     ```bash
-    openclaw plugins install @zcuss/channel-mattermost
+    openclaw plugins install zcusclaw-channel-mattermost
     ```
   </Tab>
   <Tab title="Local checkout">
@@ -355,7 +355,7 @@ When a user clicks a button:
 
 <Steps>
   <Step title="Buttons replaced with confirmation">
-    All buttons are replaced with a confirmation line (e.g., "✓ **Yes** selected by @user").
+    All buttons are replaced with a confirmation line (e.g., "âœ“ **Yes** selected by @user").
   </Step>
   <Step title="Agent receives the selection">
     The agent receives the selection as an inbound message and responds.

@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Adds the Clickclack channel surface for sending and receiving OpenClaw messages."
 read_when:
   - You are installing, configuring, or auditing the clickclack plugin
@@ -11,7 +11,7 @@ Adds the Clickclack channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/channel-clickclack`
+- Package: `zcusclaw-channel-clickclack`
 - Install route: included in OpenClaw
 
 ## Surface

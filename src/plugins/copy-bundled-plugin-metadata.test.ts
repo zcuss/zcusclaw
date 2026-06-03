@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
@@ -441,7 +441,7 @@ describe("copyBundledPluginMetadata", () => {
     const repoRoot = makeRepoRoot("openclaw-bundled-plugin-excluded-meta-");
     createPlugin(repoRoot, {
       id: "qqbot",
-      packageName: "@zcuss/channel-qqbot",
+      packageName: "zcusclaw-channel-qqbot",
       packageOpenClaw: {
         extensions: ["./index.ts"],
         setupEntry: "./setup-entry.ts",

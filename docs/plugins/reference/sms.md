@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Twilio SMS channel plugin for OpenClaw text messages."
 read_when:
   - You are installing, configuring, or auditing the sms plugin
@@ -11,7 +11,7 @@ Twilio SMS channel plugin for OpenClaw text messages.
 
 ## Distribution
 
-- Package: `@zcuss/channel-sms`
+- Package: `zcusclaw-channel-sms`
 - Install route: included in OpenClaw
 
 ## Surface

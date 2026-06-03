@@ -1,4 +1,4 @@
-/**
+﻿/**
  * QQBot plugin version resolver.
  *
  * Reads the version field from this plugin's own `package.json` by
@@ -25,7 +25,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** `name` field in this plugin's `package.json`. */
-const QQBOT_PLUGIN_PKG_NAME = "@zcuss/channel-qqbot";
+const QQBOT_PLUGIN_PKG_NAME = "zcusclaw-channel-qqbot";
 
 /** Sentinel used when the version cannot be resolved. */
 export const QQBOT_PLUGIN_VERSION_UNKNOWN = "unknown";
@@ -33,7 +33,7 @@ export const QQBOT_PLUGIN_VERSION_UNKNOWN = "unknown";
 /**
  * Resolve the QQBot plugin version from `package.json`.
  *
- * @param startUrl — pass `import.meta.url` from the call site so the
+ * @param startUrl â€” pass `import.meta.url` from the call site so the
  *   lookup begins at the caller's file regardless of where this helper
  *   itself lives. Falls back to this module's own location when omitted.
  */

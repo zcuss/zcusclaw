@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import {
   collectPluginNpmPublishedRuntimeErrors,
   findPackedPackageReadmePath,
@@ -214,7 +214,7 @@ describe("collectPluginNpmPublishedRuntimeErrors", () => {
     expect(
       collectPluginNpmPublishedRuntimeErrors({
         packageJson: {
-          name: "@zcuss/channel-qqbot",
+          name: "zcusclaw-channel-qqbot",
           version: "2026.5.3",
           openclaw: {
             extensions: ["./index.ts"],

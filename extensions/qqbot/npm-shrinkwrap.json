@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-qqbot",
+  "name": "zcusclaw-channel-qqbot",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-qqbot",
+      "name": "zcusclaw-channel-qqbot",
       "version": "2026.6.2",
       "dependencies": {
         "@tencent-connect/qqbot-connector": "1.1.0",

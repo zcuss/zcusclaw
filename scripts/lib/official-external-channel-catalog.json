@@ -16,7 +16,7 @@
         "channel": {
           "id": "wecom",
           "label": "WeCom",
-          "selectionLabel": "WeComï¼ˆä¼ä¸šå¾®ä¿¡ï¼‰",
+          "selectionLabel": "WeComÃ¯Â¼Ë†Ã¤Â¼ÂÃ¤Â¸Å¡Ã¥Â¾Â®Ã¤Â¿Â¡Ã¯Â¼â€°",
           "detailLabel": "WeCom",
           "docsPath": "/plugins/community#wecom",
           "docsLabel": "wecom",
@@ -57,12 +57,12 @@
         "channel": {
           "id": "yuanbao",
           "label": "Yuanbao",
-          "selectionLabel": "Yuanbao (å…ƒå®)",
+          "selectionLabel": "Yuanbao (Ã¥â€¦Æ’Ã¥Â®Â)",
           "detailLabel": "Yuanbao",
           "docsPath": "/plugins/community#yuanbao",
           "docsLabel": "yuanbao",
           "blurb": "Tencent Yuanbao AI assistant conversation channel.",
-          "aliases": ["yuanbao", "yb", "tencent-yuanbao", "å…ƒå®"],
+          "aliases": ["yuanbao", "yb", "tencent-yuanbao", "Ã¥â€¦Æ’Ã¥Â®Â"],
           "order": 85
         },
         "channelConfigs": {
@@ -95,12 +95,12 @@
         "channel": {
           "id": "openclaw-weixin",
           "label": "Weixin",
-          "selectionLabel": "Weixinï¼ˆå¾®ä¿¡ï¼‰",
+          "selectionLabel": "WeixinÃ¯Â¼Ë†Ã¥Â¾Â®Ã¤Â¿Â¡Ã¯Â¼â€°",
           "detailLabel": "Weixin",
           "docsPath": "/channels/wechat",
           "docsLabel": "weixin",
           "blurb": "Personal WeChat messaging via QR-code login.",
-          "aliases": ["weixin", "wechat", "å¾®ä¿¡"],
+          "aliases": ["weixin", "wechat", "Ã¥Â¾Â®Ã¤Â¿Â¡"],
           "order": 75
         },
         "channelConfigs": {
@@ -122,7 +122,7 @@
       }
     },
     {
-      "name": "@zcuss/channel-feishu",
+      "name": "zcusclaw-channel-feishu",
       "description": "OpenClaw Feishu/Lark channel plugin",
       "source": "official",
       "kind": "channel",
@@ -130,23 +130,23 @@
         "channel": {
           "id": "feishu",
           "label": "Feishu",
-          "selectionLabel": "Feishu/Lark (é£žä¹¦)",
+          "selectionLabel": "Feishu/Lark (Ã©Â£Å¾Ã¤Â¹Â¦)",
           "docsPath": "/channels/feishu",
           "docsLabel": "feishu",
-          "blurb": "é£žä¹¦/Lark enterprise messaging with doc/wiki/drive tools.",
+          "blurb": "Ã©Â£Å¾Ã¤Â¹Â¦/Lark enterprise messaging with doc/wiki/drive tools.",
           "aliases": ["lark"],
           "order": 35,
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-feishu",
+          "npmSpec": "zcusclaw-channel-feishu",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.5.29"
         }
       }
     },
     {
-      "name": "@zcuss/channel-googlechat",
+      "name": "zcusclaw-channel-googlechat",
       "description": "OpenClaw Google Chat channel plugin",
       "source": "official",
       "kind": "channel",
@@ -189,14 +189,14 @@
           ]
         },
         "install": {
-          "npmSpec": "@zcuss/channel-googlechat",
+          "npmSpec": "zcusclaw-channel-googlechat",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-line",
+      "name": "zcusclaw-channel-line",
       "description": "OpenClaw LINE channel plugin",
       "source": "official",
       "kind": "channel",
@@ -214,14 +214,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-line",
+          "npmSpec": "zcusclaw-channel-line",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-matrix",
+      "name": "zcusclaw-channel-matrix",
       "description": "OpenClaw Matrix channel plugin",
       "source": "official",
       "kind": "channel",
@@ -266,8 +266,8 @@
           ]
         },
         "install": {
-          "clawhubSpec": "clawhub:@zcuss/channel-matrix",
-          "npmSpec": "@zcuss/channel-matrix",
+          "clawhubSpec": "clawhub:zcusclaw-channel-matrix",
+          "npmSpec": "zcusclaw-channel-matrix",
           "defaultChoice": "clawhub",
           "minHostVersion": ">=2026.4.10",
           "allowInvalidConfigRecovery": true
@@ -275,7 +275,7 @@
       }
     },
     {
-      "name": "@zcuss/channel-msteams",
+      "name": "zcusclaw-channel-msteams",
       "description": "OpenClaw Microsoft Teams channel plugin",
       "source": "official",
       "kind": "channel",
@@ -291,14 +291,14 @@
           "order": 60
         },
         "install": {
-          "npmSpec": "@zcuss/channel-msteams",
+          "npmSpec": "zcusclaw-channel-msteams",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-nextcloud-talk",
+      "name": "zcusclaw-channel-nextcloud-talk",
       "description": "OpenClaw Nextcloud Talk channel plugin",
       "source": "official",
       "kind": "channel",
@@ -315,14 +315,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-nextcloud-talk",
+          "npmSpec": "zcusclaw-channel-nextcloud-talk",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-nostr",
+      "name": "zcusclaw-channel-nostr",
       "description": "OpenClaw Nostr channel plugin for NIP-04 encrypted DMs",
       "source": "official",
       "kind": "channel",
@@ -338,14 +338,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-nostr",
+          "npmSpec": "zcusclaw-channel-nostr",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-qqbot",
+      "name": "zcusclaw-channel-qqbot",
       "description": "OpenClaw QQ Bot channel plugin",
       "source": "official",
       "kind": "channel",
@@ -361,14 +361,14 @@
           "systemImage": "bubble.left.and.bubble.right"
         },
         "install": {
-          "npmSpec": "@zcuss/channel-qqbot",
+          "npmSpec": "zcusclaw-channel-qqbot",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-slack",
+      "name": "zcusclaw-channel-slack",
       "description": "OpenClaw Slack channel plugin",
       "source": "official",
       "kind": "channel",
@@ -395,7 +395,7 @@
           }
         },
         "install": {
-          "npmSpec": "@zcuss/channel-slack",
+          "npmSpec": "zcusclaw-channel-slack",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.5.12-beta.1",
           "allowInvalidConfigRecovery": true
@@ -403,7 +403,7 @@
       }
     },
     {
-      "name": "@zcuss/channel-synology-chat",
+      "name": "zcusclaw-channel-synology-chat",
       "description": "Synology Chat channel plugin for OpenClaw",
       "source": "official",
       "kind": "channel",
@@ -418,14 +418,14 @@
           "order": 90
         },
         "install": {
-          "npmSpec": "@zcuss/channel-synology-chat",
+          "npmSpec": "zcusclaw-channel-synology-chat",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-tlon",
+      "name": "zcusclaw-channel-tlon",
       "description": "OpenClaw Tlon/Urbit channel plugin",
       "source": "official",
       "kind": "channel",
@@ -441,14 +441,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-tlon",
+          "npmSpec": "zcusclaw-channel-tlon",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-twitch",
+      "name": "zcusclaw-channel-twitch",
       "description": "OpenClaw Twitch channel plugin",
       "source": "official",
       "kind": "channel",
@@ -462,14 +462,14 @@
           "aliases": ["twitch-chat"]
         },
         "install": {
-          "npmSpec": "@zcuss/channel-twitch",
+          "npmSpec": "zcusclaw-channel-twitch",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-zalo",
+      "name": "zcusclaw-channel-zalo",
       "description": "OpenClaw Zalo channel plugin",
       "source": "official",
       "kind": "channel",
@@ -486,14 +486,14 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-zalo",
+          "npmSpec": "zcusclaw-channel-zalo",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-zalouser",
+      "name": "zcusclaw-channel-zalouser",
       "description": "OpenClaw Zalo Personal Account plugin via native zca-js integration",
       "source": "official",
       "kind": "channel",
@@ -510,14 +510,14 @@
           "quickstartAllowFrom": false
         },
         "install": {
-          "npmSpec": "@zcuss/channel-zalouser",
+          "npmSpec": "zcusclaw-channel-zalouser",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-clickclack",
+      "name": "zcusclaw-channel-clickclack",
       "description": "OpenClaw ClickClack channel plugin",
       "source": "official",
       "kind": "channel",
@@ -536,14 +536,14 @@
           "order": 85
         },
         "install": {
-          "npmSpec": "@zcuss/channel-clickclack",
+          "npmSpec": "zcusclaw-channel-clickclack",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.6.2"
         }
       }
     },
     {
-      "name": "@zcuss/channel-imessage",
+      "name": "zcusclaw-channel-imessage",
       "description": "OpenClaw iMessage channel plugin using imsg on a signed-in Mac",
       "source": "official",
       "kind": "channel",
@@ -560,14 +560,14 @@
           "systemImage": "message.fill"
         },
         "install": {
-          "npmSpec": "@zcuss/channel-imessage",
+          "npmSpec": "zcusclaw-channel-imessage",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.6.2"
         }
       }
     },
     {
-      "name": "@zcuss/channel-irc",
+      "name": "zcusclaw-channel-irc",
       "description": "OpenClaw IRC channel plugin",
       "source": "official",
       "kind": "channel",
@@ -584,14 +584,14 @@
           "systemImage": "network"
         },
         "install": {
-          "npmSpec": "@zcuss/channel-irc",
+          "npmSpec": "zcusclaw-channel-irc",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-mattermost",
+      "name": "zcusclaw-channel-mattermost",
       "description": "OpenClaw Mattermost channel plugin",
       "source": "official",
       "kind": "channel",
@@ -606,14 +606,14 @@
           "order": 65
         },
         "install": {
-          "npmSpec": "@zcuss/channel-mattermost",
+          "npmSpec": "zcusclaw-channel-mattermost",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.4.10"
         }
       }
     },
     {
-      "name": "@zcuss/channel-signal",
+      "name": "zcusclaw-channel-signal",
       "description": "OpenClaw Signal channel plugin",
       "source": "official",
       "kind": "channel",
@@ -630,14 +630,14 @@
           "markdownCapable": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-signal",
+          "npmSpec": "zcusclaw-channel-signal",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.6.2"
         }
       }
     },
     {
-      "name": "@zcuss/channel-sms",
+      "name": "zcusclaw-channel-sms",
       "description": "OpenClaw SMS channel plugin for Twilio text messages.",
       "source": "official",
       "kind": "channel",
@@ -654,7 +654,7 @@
           "quickstartAllowFrom": true
         },
         "install": {
-          "npmSpec": "@zcuss/channel-sms",
+          "npmSpec": "zcusclaw-channel-sms",
           "defaultChoice": "npm",
           "minHostVersion": ">=2026.6.2"
         }

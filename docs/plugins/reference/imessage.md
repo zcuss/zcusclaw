@@ -1,4 +1,4 @@
----
+﻿---
 summary: "Adds the iMessage channel surface for sending and receiving OpenClaw messages."
 read_when:
   - You are installing, configuring, or auditing the imessage plugin
@@ -11,7 +11,7 @@ Adds the iMessage channel surface for sending and receiving OpenClaw messages.
 
 ## Distribution
 
-- Package: `@zcuss/channel-imessage`
+- Package: `zcusclaw-channel-imessage`
 - Install route: included in OpenClaw
 
 ## Surface

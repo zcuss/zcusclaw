@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { syncPluginVersions } from "../../scripts/sync-plugin-versions.js";
@@ -24,7 +24,7 @@ describe("syncPluginVersions", () => {
       version: "2026.4.1",
     });
     writeJson(path.join(rootDir, "extensions/imessage/package.json"), {
-      name: "@zcuss/channel-imessage",
+      name: "zcusclaw-channel-imessage",
       version: "2026.3.30",
       devDependencies: {
         openclaw: "workspace:*",
@@ -65,7 +65,7 @@ describe("syncPluginVersions", () => {
       };
     };
 
-    expect(summary.updated).toContain("@zcuss/channel-imessage");
+    expect(summary.updated).toContain("zcusclaw-channel-imessage");
     expect(updatedPackage.version).toBe("2026.4.1");
     expect(updatedPackage.devDependencies?.openclaw).toBe("workspace:*");
     expect(updatedPackage.peerDependencies?.openclaw).toBe(">=2026.4.1");

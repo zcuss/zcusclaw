@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-signal",
+  "name": "zcusclaw-channel-signal",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-signal",
+      "name": "zcusclaw-channel-signal",
       "version": "2026.6.2",
       "dependencies": {
         "ws": "8.21.0"

@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+﻿import fs from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { OpenClawConfig } from "../config/types.openclaw.js";
@@ -186,7 +186,7 @@ describe("ensureOnboardingPluginInstalled", () => {
           pluginId: "qqbot",
           label: "QQ Bot",
           install: {
-            npmSpec: "@zcuss/channel-qqbot@beta",
+            npmSpec: "zcusclaw-channel-qqbot@beta",
           },
         },
         prompter: {
@@ -198,10 +198,10 @@ describe("ensureOnboardingPluginInstalled", () => {
         runtime: {} as never,
       });
 
-      expect(captured?.message).toBe("安装 QQ Bot 插件？");
+      expect(captured?.message).toBe("å®‰è£… QQ Bot æ’ä»¶ï¼Ÿ");
       expect(captured?.options).toEqual([
-        { value: "npm", label: "从 npm 下载（@zcuss/channel-qqbot@beta）" },
-        { value: "skip", label: "暂时跳过" },
+        { value: "npm", label: "ä»Ž npm ä¸‹è½½ï¼ˆzcusclaw-channel-qqbot@betaï¼‰" },
+        { value: "skip", label: "æš‚æ—¶è·³è¿‡" },
       ]);
     } finally {
       if (previousLocale === undefined) {
@@ -248,8 +248,11 @@ describe("ensureOnboardingPluginInstalled", () => {
         runtime: { error: vi.fn() } as never,
       });
 
-      expect(progress).toHaveBeenCalledWith("正在安装 Demo Plugin 插件...");
-      expect(note).toHaveBeenCalledWith("无法启用 Demo Plugin：blocked by allowlist。", "插件安装");
+      expect(progress).toHaveBeenCalledWith("æ­£åœ¨å®‰è£… Demo Plugin æ’ä»¶...");
+      expect(note).toHaveBeenCalledWith(
+        "æ— æ³•å¯ç”¨ Demo Pluginï¼šblocked by allowlistã€‚",
+        "æ’ä»¶å®‰è£…",
+      );
     } finally {
       if (previousLocale === undefined) {
         delete process.env.OPENCLAW_LOCALE;
@@ -412,7 +415,7 @@ describe("ensureOnboardingPluginInstalled", () => {
 
   it("installs and records ClawHub provider plugins with source facts", async () => {
     installPluginFromClawHub.mockImplementation(async (params) => {
-      params.logger?.info?.("Downloading demo-plugin from ClawHub…");
+      params.logger?.info?.("Downloading demo-plugin from ClawHubâ€¦");
       return {
         ok: true,
         pluginId: "demo-plugin",
@@ -508,7 +511,7 @@ describe("ensureOnboardingPluginInstalled", () => {
     };
     buildNpmResolutionInstallFields.mockReturnValueOnce(installFields);
     installPluginFromNpmSpec.mockImplementation(async (params) => {
-      params.logger?.info?.("Downloading demo-plugin…");
+      params.logger?.info?.("Downloading demo-pluginâ€¦");
       return {
         ok: true,
         pluginId: "demo-plugin",

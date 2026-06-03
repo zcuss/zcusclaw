@@ -47,7 +47,8 @@ function isBareImportSpecifier(id: string): boolean {
   if (
     id === "@openclaw/llm-core" ||
     id.startsWith("@openclaw/llm-core/") ||
-    id === "@openclaw/model-catalog-core/model-catalog-types" ||
+    id === "@openclaw/model-catalog-core" ||
+    id.startsWith("@openclaw/model-catalog-core/") ||
     id.startsWith("@openclaw/normalization-core/") ||
     id.startsWith("@openclaw/media-core/") ||
     id.startsWith("@openclaw/acp-core/")
@@ -62,17 +63,27 @@ function removeExistingFlatDeclarations(outDir: string): void {
     return;
   }
   for (const entry of fs.readdirSync(outDir, { withFileTypes: true })) {
-    if (!entry.isFile() || !entry.name.endsWith(".d.ts")) {
+    if (
+      !entry.isFile() ||
+      (!entry.name.endsWith(".d.ts") &&
+        !entry.name.endsWith(".js") &&
+        !entry.name.endsWith(".js.map"))
+    ) {
       continue;
     }
     fs.rmSync(path.join(outDir, entry.name), { force: true });
   }
 }
 
-function copyFlatDeclarations(fromDir: string, toDir: string): void {
+function copyFlatArtifacts(fromDir: string, toDir: string): void {
   fs.mkdirSync(toDir, { recursive: true });
   for (const entry of fs.readdirSync(fromDir, { withFileTypes: true })) {
-    if (!entry.isFile() || !entry.name.endsWith(".d.ts")) {
+    if (
+      !entry.isFile() ||
+      (!entry.name.endsWith(".d.ts") &&
+        !entry.name.endsWith(".js") &&
+        !entry.name.endsWith(".js.map"))
+    ) {
       continue;
     }
     fs.copyFileSync(path.join(fromDir, entry.name), path.join(toDir, entry.name));
@@ -106,7 +117,7 @@ try {
   });
 
   removeExistingFlatDeclarations(distPluginSdkDir);
-  copyFlatDeclarations(flatDeclarationTempDir, distPluginSdkDir);
+  copyFlatArtifacts(flatDeclarationTempDir, distPluginSdkDir);
 } finally {
   fs.rmSync(flatDeclarationTempDir, { recursive: true, force: true });
 }

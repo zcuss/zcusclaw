@@ -1,5 +1,5 @@
 {
-  "name": "@zcuss/openclaw",
+  "name": "zcusclaw",
   "version": "2026.6.2",
   "description": "Multi-channel AI gateway with extensible messaging integrations",
   "keywords": [],
@@ -14,7 +14,8 @@
     "url": "git+https://github.com/zcuss/zcusclaw.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "bin": {
     "zcusclaw": "openclaw.mjs"

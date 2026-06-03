@@ -1,11 +1,11 @@
 {
-  "name": "@zcuss/channel-zalouser",
+  "name": "zcusclaw-channel-zalouser",
   "version": "2026.6.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@zcuss/channel-zalouser",
+      "name": "zcusclaw-channel-zalouser",
       "version": "2026.6.2",
       "dependencies": {
         "typebox": "1.1.39",

@@ -1,10 +1,10 @@
----
+﻿---
 summary: "Channel configuration: access control, pairing, per-channel keys across Slack, Discord, Telegram, WhatsApp, Matrix, iMessage, and more"
 read_when:
   - Configuring a channel plugin (auth, access control, multi-account)
   - Troubleshooting per-channel config keys
   - Auditing DM policy, group policy, or mention gating
-title: "Configuration — channels"
+title: "Configuration â€” channels"
 ---
 
 Per-channel configuration keys under `channels.*`. Covers DM and group access,
@@ -514,8 +514,8 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
 
 Mattermost ships as a bundled plugin in current OpenClaw releases. Older or
 custom builds can install a current npm package with
-`openclaw plugins install @zcuss/channel-mattermost`. Check
-[npmjs.com/package/@zcuss/channel-mattermost](https://npm.pkg.github.com/@zcuss/channel-mattermost)
+`openclaw plugins install zcusclaw-channel-mattermost`. Check
+[npmjs.com/package/zcusclaw-channel-mattermost](https://npm.pkg.github.com/zcusclaw-channel-mattermost)
 for the current dist-tags before pinning a version.
 
 ```json5
@@ -802,7 +802,7 @@ This rule applies to normal agent final text. Plugin-owned conversation bindings
 
 Symptom: a group/channel @mention shows the typing indicator and the gateway log reports `dispatch complete (queuedFinal=false, replies=0)`, but no message lands in the room. DMs to the same agent reply normally.
 
-Cause: the group/channel visible-reply mode resolves to `"message_tool"`, so OpenClaw runs the turn but suppresses the final assistant text unless the agent calls `message(action=send)`. There is no `NO_REPLY` contract in this mode; no message-tool call means no source reply. There is no error because suppression is the configured behavior. Normal group and channel turns default to `"automatic"`, so this symptom only appears when `messages.groupChat.visibleReplies` (or global `messages.visibleReplies`) is explicitly set to `"message_tool"`. Harness `defaultVisibleReplies` does not apply here — the group/channel resolver ignores it; it only affects direct/source chats (the Codex harness suppresses direct-chat finals that way).
+Cause: the group/channel visible-reply mode resolves to `"message_tool"`, so OpenClaw runs the turn but suppresses the final assistant text unless the agent calls `message(action=send)`. There is no `NO_REPLY` contract in this mode; no message-tool call means no source reply. There is no error because suppression is the configured behavior. Normal group and channel turns default to `"automatic"`, so this symptom only appears when `messages.groupChat.visibleReplies` (or global `messages.visibleReplies`) is explicitly set to `"message_tool"`. Harness `defaultVisibleReplies` does not apply here â€” the group/channel resolver ignores it; it only affects direct/source chats (the Codex harness suppresses direct-chat finals that way).
 
 Fix: either pick a stronger tool-calling model, remove the explicit `"message_tool"` override to fall back to the `"automatic"` default, or set `messages.groupChat.visibleReplies: "automatic"` to force visible replies for every group/channel request. The gateway hot-reloads `messages` config after the file is saved; only restart the gateway when file watching or config reload is disabled in the deployment.
 
@@ -849,7 +849,7 @@ Fix: either pick a stronger tool-calling model, remove the explicit `"message_to
 }
 ```
 
-Resolution: per-DM override → provider default → no limit (all retained).
+Resolution: per-DM override â†’ provider default â†’ no limit (all retained).
 
 Supported: `telegram`, `whatsapp`, `discord`, `slack`, `signal`, `imessage`, `msteams`.
 
@@ -938,6 +938,6 @@ Include your own number in `allowFrom` to enable self-chat mode (ignores native 
 
 ## Related
 
-- [Configuration reference](/gateway/configuration-reference) — top-level keys
-- [Configuration — agents](/gateway/config-agents)
+- [Configuration reference](/gateway/configuration-reference) â€” top-level keys
+- [Configuration â€” agents](/gateway/config-agents)
 - [Channels overview](/channels)
