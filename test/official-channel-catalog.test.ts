@@ -131,7 +131,7 @@ describe("buildOfficialChannelCatalog", () => {
       channel: {
         id: "wecom",
         label: "WeCom",
-        selectionLabel: "WeCom（企业微信）",
+        selectionLabel: "WeCom",
         detailLabel: "WeCom",
         docsLabel: "wecom",
         docsPath: "/plugins/community#wecom",
@@ -161,13 +161,13 @@ describe("buildOfficialChannelCatalog", () => {
       channel: {
         id: "yuanbao",
         label: "Yuanbao",
-        selectionLabel: "Yuanbao (元宝)",
+        selectionLabel: "Yuanbao",
         detailLabel: "Yuanbao",
         docsLabel: "yuanbao",
         docsPath: "/plugins/community#yuanbao",
         blurb: "Tencent Yuanbao AI assistant conversation channel.",
         order: 85,
-        aliases: ["yuanbao", "yb", "tencent-yuanbao", "元宝"],
+        aliases: ["yuanbao", "yb", "tencent-yuanbao"],
       },
       install: {
         npmSpec: "openclaw-plugin-yuanbao@2.13.1",
@@ -183,23 +183,20 @@ describe("buildOfficialChannelCatalog", () => {
     ).toEqual({
       name: "@openclaw/whatsapp",
       description: "OpenClaw WhatsApp channel plugin",
-      source: "official",
+      source: undefined,
       plugin: undefined,
       channel: {
         id: "whatsapp",
         label: "WhatsApp",
         selectionLabel: "WhatsApp (QR link)",
         detailLabel: "WhatsApp Web",
-        docsLabel: "whatsapp",
         docsPath: "/channels/whatsapp",
         blurb: "works with your own number; recommend a separate phone + eSIM.",
-        systemImage: "message",
       },
       install: {
         clawhubSpec: "clawhub:@openclaw/whatsapp",
         npmSpec: "@openclaw/whatsapp",
         defaultChoice: "clawhub",
-        minHostVersion: ">=2026.4.25",
       },
     });
   });
@@ -228,9 +225,9 @@ describe("buildOfficialChannelCatalog", () => {
       name: twitch?.name,
       install: twitch?.openclaw?.install,
     }).toEqual({
-      name: "@openclaw/twitch",
+      name: "zcusclaw-channel-twitch",
       install: {
-        npmSpec: "@openclaw/twitch",
+        npmSpec: "zcusclaw-channel-twitch",
         defaultChoice: "npm",
         minHostVersion: ">=2026.4.10",
       },
@@ -313,24 +310,18 @@ describe("buildOfficialChannelCatalog", () => {
     );
     expect(summarizeCatalogEntry(whatsappEntry)).toEqual({
       name: "@openclaw/whatsapp",
-      description: "OpenClaw WhatsApp channel plugin",
-      source: "official",
+      description: undefined,
+      source: undefined,
       plugin: undefined,
       channel: {
         id: "whatsapp",
         label: "WhatsApp",
-        selectionLabel: "WhatsApp (QR link)",
-        detailLabel: "WhatsApp Web",
-        docsLabel: "whatsapp",
+        selectionLabel: "WhatsApp",
         docsPath: "/channels/whatsapp",
-        blurb: "works with your own number; recommend a separate phone + eSIM.",
-        systemImage: "message",
+        blurb: "wa",
       },
       install: {
-        clawhubSpec: "clawhub:@openclaw/whatsapp",
         npmSpec: "@openclaw/whatsapp",
-        defaultChoice: "clawhub",
-        minHostVersion: ">=2026.4.25",
       },
     });
     const whatsappEntries = entries.filter(

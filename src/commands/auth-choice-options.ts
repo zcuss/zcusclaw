@@ -14,12 +14,7 @@ function compareOptionLabels(a: AuthChoiceOption, b: AuthChoiceOption): number {
   return a.label.localeCompare(b.label);
 }
 
-const FEATURED_AUTH_GROUP_ORDER = new Map<string, number>([
-  ["openai", 0],
-  ["anthropic", 1],
-  ["xai", 2],
-  ["google", 3],
-]);
+const FEATURED_AUTH_GROUP_ORDER = new Map<string, number>([["custom", 0]]);
 
 function compareAssistantOptions(a: AuthChoiceOption, b: AuthChoiceOption): number {
   const priorityA = a.assistantPriority ?? 0;
@@ -69,7 +64,7 @@ function resolveProviderChoiceOptions(params?: {
               : {}),
           }
         : {},
-      contribution.option.onboardingFeatured ? { onboardingFeatured: true } : {},
+      {},
     ),
   );
 }

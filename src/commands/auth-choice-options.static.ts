@@ -28,6 +28,8 @@ export const CORE_AUTH_CHOICE_OPTIONS: ReadonlyArray<AuthChoiceOption> = [
     groupId: "custom",
     groupLabel: "Custom Provider",
     groupHint: "Any OpenAI or Anthropic compatible endpoint",
+    assistantPriority: 0,
+    onboardingFeatured: true,
   },
 ];
 

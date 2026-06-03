@@ -855,7 +855,9 @@ describe("runSetupWizard", () => {
       getMockCallArg(promptDefaultModel, 0, 0, "default model prompt"),
       {
         allowKeep: false,
-        browseCatalogOnDemand: true,
+        browseCatalogOnDemand: false,
+        includeProviderPluginSetups: false,
+        loadCatalog: false,
       },
       "default model prompt params",
     );

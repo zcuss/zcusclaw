@@ -757,9 +757,10 @@ export async function runSetupWizard(
         prompter,
         allowKeep: authChoiceModelSelectionPolicy?.allowKeepCurrent ?? true,
         ignoreAllowlist: true,
-        includeProviderPluginSetups: true,
+        includeProviderPluginSetups: false,
         preferredProvider: authChoiceModelSelectionPolicy?.preferredProvider,
-        browseCatalogOnDemand: true,
+        browseCatalogOnDemand: false,
+        loadCatalog: false,
         workspaceDir,
         runtime,
       });

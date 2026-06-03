@@ -868,7 +868,7 @@ export const en = {
       blurbs: {
         clickclack: "self-hosted chat via first-class ClickClack bot tokens.",
         discord: "very well supported right now.",
-        feishu: "飞书/Lark enterprise messaging.",
+        feishu: "Feishu/Lark enterprise messaging.",
         googlechat: "Google Workspace Chat app with HTTP webhook.",
         imessage:
           "Local iMessage/SMS through the imsg bridge, including private API message actions when enabled.",

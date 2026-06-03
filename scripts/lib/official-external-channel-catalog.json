@@ -16,7 +16,7 @@
         "channel": {
           "id": "wecom",
           "label": "WeCom",
-          "selectionLabel": "WeComÃ¯Â¼Ë†Ã¤Â¼ÂÃ¤Â¸Å¡Ã¥Â¾Â®Ã¤Â¿Â¡Ã¯Â¼â€°",
+          "selectionLabel": "WeCom",
           "detailLabel": "WeCom",
           "docsPath": "/plugins/community#wecom",
           "docsLabel": "wecom",
@@ -57,12 +57,12 @@
         "channel": {
           "id": "yuanbao",
           "label": "Yuanbao",
-          "selectionLabel": "Yuanbao (Ã¥â€¦Æ’Ã¥Â®Â)",
+          "selectionLabel": "Yuanbao",
           "detailLabel": "Yuanbao",
           "docsPath": "/plugins/community#yuanbao",
           "docsLabel": "yuanbao",
           "blurb": "Tencent Yuanbao AI assistant conversation channel.",
-          "aliases": ["yuanbao", "yb", "tencent-yuanbao", "Ã¥â€¦Æ’Ã¥Â®Â"],
+          "aliases": ["yuanbao", "yb", "tencent-yuanbao"],
           "order": 85
         },
         "channelConfigs": {
@@ -95,12 +95,12 @@
         "channel": {
           "id": "openclaw-weixin",
           "label": "Weixin",
-          "selectionLabel": "WeixinÃ¯Â¼Ë†Ã¥Â¾Â®Ã¤Â¿Â¡Ã¯Â¼â€°",
+          "selectionLabel": "Weixin",
           "detailLabel": "Weixin",
           "docsPath": "/channels/wechat",
           "docsLabel": "weixin",
           "blurb": "Personal WeChat messaging via QR-code login.",
-          "aliases": ["weixin", "wechat", "Ã¥Â¾Â®Ã¤Â¿Â¡"],
+          "aliases": ["weixin", "wechat"],
           "order": 75
         },
         "channelConfigs": {
