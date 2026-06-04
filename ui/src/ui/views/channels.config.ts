@@ -1,3 +1,4 @@
+import JSON5 from "json5";
 import { html } from "lit";
 import { t } from "../../i18n/index.ts";
 import type { ConfigUiHints } from "../types.ts";
@@ -13,6 +14,16 @@ type ChannelConfigFormProps = {
   disabled: boolean;
   onPatch: (path: Array<string | number>, value: unknown) => void;
 };
+
+type ChannelConfigRawEditorProps = {
+  channelId: string;
+  configValue: Record<string, unknown> | null;
+  disabled: boolean;
+  onPatch: (path: Array<string | number>, value: unknown) => void;
+};
+
+const channelRawDraftById = new Map<string, string>();
+const channelRawErrorById = new Map<string, string>();
 
 function resolveSchemaNode(
   schema: JsonSchema | null,
@@ -83,16 +94,81 @@ function renderExtraChannelFields(value: Record<string, unknown>) {
   `;
 }
 
+function serializeChannelRawValue(value: Record<string, unknown>): string {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
+function rawDraftMatchesValue(draft: string, value: Record<string, unknown>): boolean {
+  try {
+    const parsed = JSON5.parse(draft) as unknown;
+    return JSON.stringify(parsed) === JSON.stringify(value);
+  } catch {
+    return false;
+  }
+}
+
+function resolveRawDraft(channelId: string, value: Record<string, unknown>): string {
+  const nextSerialized = serializeChannelRawValue(value);
+  const existingDraft = channelRawDraftById.get(channelId);
+  if (existingDraft && rawDraftMatchesValue(existingDraft, value)) {
+    return existingDraft;
+  }
+  channelRawDraftById.set(channelId, nextSerialized);
+  return nextSerialized;
+}
+
+function renderChannelRawEditor(props: ChannelConfigRawEditorProps) {
+  const value = resolveChannelValue(props.configValue ?? {}, props.channelId);
+  const rawDraft = resolveRawDraft(props.channelId, value);
+  const rawError = channelRawErrorById.get(props.channelId) ?? null;
+  return html`
+    <div class="callout info" style="margin-bottom: 12px;">
+      Schema form belum tersedia untuk channel ini. Edit object channel langsung di bawah.
+    </div>
+    <div class="field">
+      <span>Raw channel config (JSON/JSON5)</span>
+      <textarea
+        placeholder="{
+  enabled: true
+}"
+        .value=${rawDraft}
+        ?disabled=${props.disabled}
+        @input=${(event: Event) => {
+          const next = (event.target as HTMLTextAreaElement).value;
+          channelRawDraftById.set(props.channelId, next);
+          try {
+            const parsed = JSON5.parse(next) as unknown;
+            if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+              channelRawErrorById.set(props.channelId, "Channel config harus object JSON.");
+              return;
+            }
+            channelRawErrorById.delete(props.channelId);
+            props.onPatch(["channels", props.channelId], parsed);
+          } catch (error) {
+            channelRawErrorById.set(props.channelId, `JSON5 tidak valid: ${String(error)}`);
+          }
+        }}
+      ></textarea>
+    </div>
+    ${rawError
+      ? html`<div class="callout danger" style="margin-top: 12px;">${rawError}</div>`
+      : null}
+    ${renderExtraChannelFields(value)}
+  `;
+}
+
 export function renderChannelConfigForm(props: ChannelConfigFormProps) {
   const analysis = analyzeConfigSchema(props.schema);
   const normalized = analysis.schema;
   if (!normalized) {
-    return html` <div class="callout danger">Schema unavailable. Use Raw.</div> `;
+    return renderChannelRawEditor(props);
   }
   const node = resolveSchemaNode(normalized, ["channels", props.channelId]);
   if (!node) {
-    return html` <div class="callout danger">Channel config schema unavailable.</div> `;
+    return renderChannelRawEditor(props);
   }
+  channelRawErrorById.delete(props.channelId);
+  channelRawDraftById.delete(props.channelId);
   const configValue = props.configValue ?? {};
   const value = resolveChannelValue(configValue, props.channelId);
   return html`
@@ -127,10 +203,10 @@ export function renderChannelConfigSection(params: { channelId: string; props: C
             disabled,
             onPatch: props.onConfigPatch,
           })}
-      <div class="row" style="margin-top: 12px;">
+      <div class="row channels-config-actions" style="margin-top: 12px;">
         <button
           class="btn primary"
-          ?disabled=${disabled || !props.configFormDirty}
+          ?disabled=${disabled || !props.configFormDirty || channelRawErrorById.has(channelId)}
           @click=${() => props.onConfigSave()}
         >
           ${props.configSaving ? "Saving…" : "Save"}

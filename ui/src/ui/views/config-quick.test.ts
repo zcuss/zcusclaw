@@ -2,7 +2,11 @@
 
 import { render } from "lit";
 import { describe, expect, it, vi } from "vitest";
-import { renderQuickSettings, type QuickSettingsProps } from "./config-quick.ts";
+import {
+  renderConfigureMenu,
+  renderQuickSettings,
+  type QuickSettingsProps,
+} from "./config-quick.ts";
 
 function expectButtonByText(container: Element, text: string): HTMLButtonElement {
   const button = Array.from(container.querySelectorAll("button")).find(
@@ -137,41 +141,34 @@ describe("renderQuickSettings", () => {
     expect(container.querySelectorAll(".qs-card--span-all")).toHaveLength(1);
   });
 
-  it("renders the configure menu and forwards section clicks", () => {
+  it("does not render the configure menu inside quick settings", () => {
     const onConfigureMenu = vi.fn();
     const container = document.createElement("div");
 
     render(renderQuickSettings(createProps({ onConfigureMenu })), container);
 
-    expect(collectQuickSettingsCardKinds(container)).toContain("qs-card--configure-menu");
-    const buttons = container.querySelectorAll(".qs-card--configure-menu button");
-    expect(buttons).toHaveLength(11);
+    expect(collectQuickSettingsCardKinds(container)).not.toContain("qs-card--configure-menu");
+    expect(container.querySelectorAll(".qs-card--configure-menu button")).toHaveLength(0);
+  });
 
-    const workspaceButton = Array.from(buttons).find(
-      (candidate) =>
-        candidate.querySelector(".qs-list-item__title")?.textContent?.trim() === "Workspace",
+  it("renders the configure hub and opens editable sections in place", () => {
+    const onConfigureMenu = vi.fn();
+    const container = document.createElement("div");
+
+    render(renderConfigureMenu(createProps({ onConfigureMenu })), container);
+
+    const buttons = container.querySelectorAll(".qs-card--configure-menu button");
+    expect(buttons).toHaveLength(10);
+    expect(container.querySelector(".qs-list-item")).not.toBeNull();
+    expect(container.querySelector(".qs-list-item__icon")).toBeNull();
+    expect(container.textContent).toContain("Form akan kebuka langsung di halaman ini.");
+
+    const workspaceButton = Array.from(buttons).find((candidate) =>
+      candidate.textContent?.includes("Workspace"),
     );
     expect(workspaceButton).toBeInstanceOf(HTMLButtonElement);
     (workspaceButton as HTMLButtonElement).click();
-    expect(onConfigureMenu).toHaveBeenCalledWith("workspace");
-  });
-
-  it("renders the configure menu when onConfigureMenu is provided", () => {
-    const onConfigureMenu = vi.fn();
-    const container = document.createElement("div");
-
-    render(renderQuickSettings(createProps({ onConfigureMenu })), container);
-
-    expect(collectQuickSettingsCardKinds(container)).toContain("qs-card--configure-menu");
-    const buttons = container.querySelectorAll(".qs-card--configure-menu button");
-    expect(buttons).toHaveLength(11);
-
-    const workspaceButton = Array.from(buttons).find(
-      (btn) => btn.querySelector(".qs-list-item__title")?.textContent?.trim() === "Workspace",
-    );
-    expect(workspaceButton).toBeDefined();
-    (workspaceButton as HTMLButtonElement).click();
-    expect(onConfigureMenu).toHaveBeenCalledWith("workspace");
+    expect(onConfigureMenu).toHaveBeenCalledWith("agents");
   });
 
   it("shows the current bootstrap default when config omits the explicit limit", () => {

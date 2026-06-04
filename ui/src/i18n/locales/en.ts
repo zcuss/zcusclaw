@@ -1148,9 +1148,9 @@ export const en: TranslationMap = {
         summary:
           "The Gateway is reachable, but it needs a matching token or password before this browser can connect.",
         stepPaste:
-          "Paste the token from openclaw dashboard --no-open or enter the configured password.",
+          "Paste the token from zcusclaw dashboard --no-open or enter the configured password.",
         stepGenerate:
-          "If no token is configured, run openclaw doctor --generate-gateway-token on the gateway host.",
+          "If no token is configured, run zcusclaw doctor --generate-gateway-token on the gateway host.",
         stepConnect: "Click Connect again after updating the credential.",
       },
       authFailed: {
@@ -1158,7 +1158,7 @@ export const en: TranslationMap = {
         summary:
           "The supplied credential was rejected. The most common cause is a stale token or a token copied from another Gateway URL.",
         stepDashboard:
-          "Run openclaw dashboard --no-open and open the fresh URL or paste its token.",
+          "Run zcusclaw dashboard --no-open and open the fresh URL or paste its token.",
         stepReplace:
           "Replace stale token/password values; do not reuse a token from another Gateway URL.",
         stepMode:
@@ -1181,8 +1181,8 @@ export const en: TranslationMap = {
           "This browser needs one-time approval from the Gateway host before it can use the Control UI.",
         upgradeSummary:
           "This browser is already known, but the requested access changed and needs a fresh approval.",
-        stepList: "Run openclaw devices list on the Gateway host.",
-        stepApproveId: "Approve this request: openclaw devices approve {requestId}.",
+        stepList: "Run zcusclaw devices list on the Gateway host.",
+        stepApproveId: "Approve this request: zcusclaw devices approve {requestId}.",
         stepApprove: "Approve the pending browser/device request from that list.",
         stepReconnect: "Reconnect after the approval completes.",
       },
@@ -1208,21 +1208,21 @@ export const en: TranslationMap = {
         summary:
           "The served Control UI and the running Gateway do not agree on the supported connection protocol.",
         stepDashboard:
-          "Reopen the served dashboard with openclaw dashboard so the UI and Gateway come from the same install.",
+          "Reopen the served dashboard with zcusclaw dashboard so the UI and Gateway come from the same install.",
         stepDevUi:
           "If using pnpm ui:dev, rebuild or restart the dev UI against the current checkout.",
         stepRestart:
-          "Restart the Gateway after updating OpenClaw so it serves the current protocol.",
+          "Restart the Gateway after updating zcusclaw so it serves the current protocol.",
       },
       network: {
         title: "Could not connect",
         summary:
           "The browser could not complete the Gateway connection. Check the target and transport before retrying credentials.",
-        stepGateway: "Confirm the Gateway is running with openclaw status or openclaw gateway run.",
+        stepGateway: "Confirm the Gateway is running with zcusclaw status or zcusclaw gateway run.",
         stepUrl:
           "Check the WebSocket URL and use wss:// when the Gateway is behind HTTPS/Tailscale Serve.",
         stepDashboard:
-          "Reopen the dashboard with openclaw dashboard --no-open to recopy the current URL and auth details.",
+          "Reopen the dashboard with zcusclaw dashboard --no-open to recopy the current URL and auth details.",
       },
     },
   },

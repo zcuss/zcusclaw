@@ -434,6 +434,15 @@ export async function refreshActiveTab(host: SettingsHost, opts?: { chatStartup?
           await primaryRefresh;
         }
         break;
+      case "configure":
+        if (host.configActiveSection === "channels") {
+          await loadChannelsTab(host);
+        } else {
+          const primaryRefresh = loadConfig(app);
+          loadConfigSchemaAfterPrimary(host, app, primaryRefresh);
+          await primaryRefresh;
+        }
+        break;
       case "overview":
         await loadOverview(host);
         break;

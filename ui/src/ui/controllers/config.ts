@@ -331,22 +331,12 @@ function untrackAutoAllowlistedPluginId(state: ConfigState, pluginId: string) {
   }
 }
 
-function syncEnabledPluginAllowlist(
+function syncAllowedPluginId(
   state: ConfigState,
   draft: Record<string, unknown>,
-  path: Array<string | number>,
-  value: unknown,
+  pluginId: string,
+  enabled: boolean,
 ) {
-  if (
-    path.length !== 4 ||
-    path[0] !== "plugins" ||
-    path[1] !== "entries" ||
-    typeof path[2] !== "string" ||
-    path[3] !== "enabled"
-  ) {
-    return;
-  }
-  const pluginId = path[2];
   const plugins =
     draft.plugins && typeof draft.plugins === "object" && !Array.isArray(draft.plugins)
       ? (draft.plugins as Record<string, unknown>)
@@ -356,7 +346,7 @@ function syncEnabledPluginAllowlist(
     untrackAutoAllowlistedPluginId(state, pluginId);
     return;
   }
-  if (value === true) {
+  if (enabled) {
     if (allow.includes(pluginId)) {
       return;
     }
@@ -380,6 +370,37 @@ function syncEnabledPluginAllowlist(
   untrackAutoAllowlistedPluginId(state, pluginId);
 }
 
+function syncEnabledPluginAllowlist(
+  state: ConfigState,
+  draft: Record<string, unknown>,
+  path: Array<string | number>,
+  value: unknown,
+) {
+  if (
+    path.length !== 4 ||
+    path[0] !== "plugins" ||
+    path[1] !== "entries" ||
+    typeof path[2] !== "string" ||
+    path[3] !== "enabled"
+  ) {
+    return;
+  }
+  syncAllowedPluginId(state, draft, path[2], value === true);
+}
+
+function syncConfiguredChannelAllowlist(
+  state: ConfigState,
+  draft: Record<string, unknown>,
+  path: Array<string | number>,
+) {
+  if (path[0] !== "channels" || typeof path[1] !== "string") {
+    return;
+  }
+  // Channel setup forms edit channels.<id> directly; when plugins.allow is active,
+  // the matching bundled channel plugin must also be allowed or runtime discovery misses it.
+  syncAllowedPluginId(state, draft, path[1], true);
+}
+
 export function updateConfigFormValue(
   state: ConfigState,
   path: Array<string | number>,
@@ -392,6 +413,7 @@ export function updateConfigFormValue(
       return;
     }
     syncEnabledPluginAllowlist(state, draft, path, value);
+    syncConfiguredChannelAllowlist(state, draft, path);
   });
 }
 

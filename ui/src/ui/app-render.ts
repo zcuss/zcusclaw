@@ -177,7 +177,12 @@ import {
 import { loadLocalAssistantIdentity } from "./storage.ts";
 import { normalizeStringEntries } from "./string-coerce.ts";
 import { normalizeOptionalString } from "./string-coerce.ts";
-import type { AgentsFilesGetResult, AgentsFilesListResult, GatewaySessionRow } from "./types.ts";
+import type {
+  AgentsFilesGetResult,
+  AgentsFilesListResult,
+  GatewaySessionRow,
+  NostrProfile,
+} from "./types.ts";
 import { isRenderableControlUiAvatarUrl } from "./views/agents-utils.ts";
 import { agentLogoUrl } from "./views/agents-utils.ts";
 import {
@@ -187,10 +192,15 @@ import {
   resolveModelPrimary,
   sortLocaleStrings,
 } from "./views/agents-utils.ts";
+import { renderConfigureChannels } from "./views/channels.configure.ts";
 import { renderChat } from "./views/chat.ts";
 import { renderCommandPalette } from "./views/command-palette.ts";
 import { getPresetById } from "./views/config-presets.ts";
-import { renderQuickSettings, type QuickSettingsChannel } from "./views/config-quick.ts";
+import {
+  renderConfigureMenu,
+  renderQuickSettings,
+  type QuickSettingsChannel,
+} from "./views/config-quick.ts";
 import { renderConfig, type ConfigProps } from "./views/config.ts";
 import {
   renderCronQuickCreate,
@@ -661,6 +671,18 @@ const AI_AGENTS_SECTION_KEYS = [
   "tools",
   "memory",
   "session",
+] as const;
+const CONFIGURE_SECTION_KEYS = [
+  "agents",
+  "auth",
+  "models",
+  "web",
+  "browser",
+  "gateway",
+  "ui",
+  "channels",
+  "plugins",
+  "skills",
 ] as const;
 type ConfigSectionSelection = {
   activeSection: string | null;
@@ -1488,72 +1510,91 @@ export function renderApp(state: AppViewState) {
     state.aiAgentsActiveSubsection,
     AI_AGENTS_SECTION_KEYS,
   );
+  const configureSelection = normalizeScopedConfigSelection(
+    state.configActiveSection,
+    state.configActiveSubsection,
+    CONFIGURE_SECTION_KEYS,
+  );
   const openConfigureMenuSection = (
     section:
-      | "workspace"
-      | "model"
+      | "agents"
+      | "auth"
+      | "models"
       | "web"
+      | "browser"
       | "gateway"
-      | "dashboard"
-      | "daemon"
+      | "ui"
       | "channels"
       | "plugins"
-      | "skills"
-      | "health"
-      | "skip",
+      | "skills",
   ) => {
-    const openAdvancedConfigSection = (configSection: string) => {
-      state.configSettingsMode = "advanced";
-      state.configActiveSection = configSection;
-      state.configActiveSubsection = null;
-      state.setTab("config");
-      requestHostUpdate?.();
-    };
-
-    switch (section) {
-      case "workspace":
-        state.setTab("sessions");
-        return;
-      case "model":
-        state.aiAgentsActiveSection = "models";
-        state.setTab("aiAgents");
-        return;
-      case "web":
-        openAdvancedConfigSection("web");
-        return;
-      case "gateway":
-        openAdvancedConfigSection("gateway");
-        return;
-      case "dashboard":
-        openAdvancedConfigSection("ui");
-        return;
-      case "daemon":
-        state.setTab("infrastructure");
-        return;
-      case "channels":
-        state.setTab("channels");
-        return;
-      case "plugins":
-        openAdvancedConfigSection("plugins");
-        return;
-      case "skills":
-        state.setTab("skills");
-        return;
-      case "health":
-        state.setTab("debug");
-        return;
-      case "skip":
-        state.setTab("overview");
-        return;
-    }
+    state.configSettingsMode = "advanced";
+    state.configActiveSection = section;
+    state.configActiveSubsection = null;
+    state.setTab("configure");
+    requestHostUpdate?.();
   };
+
+  const clearConfigureSelection = () => {
+    state.configActiveSection = null;
+    state.configActiveSubsection = null;
+    requestHostUpdate?.();
+  };
+
+  const channelPanelProps = () => ({
+    connected: state.connected,
+    loading: state.channelsLoading,
+    snapshot: state.channelsSnapshot,
+    lastError: state.channelsError,
+    lastSuccessAt: state.channelsLastSuccess,
+    whatsappMessage: state.whatsappLoginMessage,
+    whatsappQrDataUrl: state.whatsappLoginQrDataUrl,
+    whatsappConnected: state.whatsappLoginConnected,
+    whatsappBusy: state.whatsappBusy,
+    configSchema: state.configSchema,
+    configSchemaLoading: state.configSchemaLoading,
+    configForm: state.configForm,
+    configUiHints: state.configUiHints,
+    configSaving: state.configSaving,
+    configFormDirty: state.configFormDirty,
+    nostrProfileFormState: state.nostrProfileFormState,
+    nostrProfileAccountId: state.nostrProfileAccountId,
+    onRefresh: (probe: boolean) => void loadChannels(state, probe),
+    onWhatsAppStart: (force: boolean) => void state.handleWhatsAppStart(force),
+    onWhatsAppWait: () => void state.handleWhatsAppWait(),
+    onWhatsAppLogout: () => void state.handleWhatsAppLogout(),
+    onConfigPatch: (path: Array<string | number>, value: unknown) =>
+      updateConfigFormValue(state, path, value),
+    onConfigSave: () => void state.handleChannelConfigSave(),
+    onConfigReload: () => void state.handleChannelConfigReload(),
+    onNostrProfileEdit: (accountId: string, profile: NostrProfile | null) =>
+      state.handleNostrProfileEdit(accountId, profile),
+    onNostrProfileCancel: () => state.handleNostrProfileCancel(),
+    onNostrProfileFieldChange: (field: keyof NostrProfile, value: string) =>
+      state.handleNostrProfileFieldChange(field, value),
+    onNostrProfileSave: () => void state.handleNostrProfileSave(),
+    onNostrProfileImport: () => void state.handleNostrProfileImport(),
+    onNostrProfileToggleAdvanced: () => state.handleNostrProfileToggleAdvanced(),
+  });
+
+  const renderChannelsPanel = () =>
+    renderLazyView(lazyChannels, (m) => m.renderChannels(channelPanelProps()));
+
+  const renderConfigureChannelsPanel = () =>
+    renderConfigureChannels({
+      ...channelPanelProps(),
+      activeChannelId: configureSelection.activeSubsection,
+      onActiveChannelChange: (channelId) => {
+        state.configActiveSubsection = channelId;
+        requestHostUpdate?.();
+      },
+      onConfigRemove: (path) => removeConfigFormValue(state, path),
+    });
 
   const renderConfigTabForActiveTab = () => {
     switch (state.tab) {
-      case "config":
-      case "configure": {
-        // Quick Settings mode — opinionated card layout
-        if (state.tab === "configure" || state.configSettingsMode === "quick") {
+      case "config": {
+        if (state.configSettingsMode === "quick") {
           const configObj = state.configForm ?? state.configSnapshot?.config ?? {};
           const assistantAvatarOverride =
             localAssistantAvatarOverride ?? resolveAssistantAvatarOverride(configObj);
@@ -1706,7 +1747,6 @@ export function renderApp(state: AppViewState) {
             version: state.hello?.server?.version ?? "",
           });
         }
-        // Advanced mode — full config form with accordion groups
         return renderConfigTab({
           formMode: state.configFormMode,
           searchQuery: state.configSearchQuery,
@@ -1735,43 +1775,105 @@ export function renderApp(state: AppViewState) {
           ],
         });
       }
+      case "configure": {
+        const configureMenu = renderConfigureMenu({
+          currentModel: "default",
+          thinkingLevel: "off",
+          fastMode: false,
+          channels: [],
+          automation: { cronJobCount: 0, skillCount: 0, mcpServerCount: 0 },
+          security: {
+            gatewayAuth: "unknown",
+            execPolicy: "unknown",
+            deviceAuth: false,
+            browserEnabled: true,
+            toolProfile: "full",
+          },
+          theme: state.theme,
+          themeMode: state.themeMode,
+          hasCustomTheme: Boolean(state.settings.customTheme),
+          borderRadius: state.settings.borderRadius,
+          textScale: state.settings.textScale ?? 100,
+          setTheme: (theme, context) => state.setTheme(theme, context),
+          setThemeMode: (mode, context) => state.setThemeMode(mode, context),
+          setBorderRadius: (value) => state.setBorderRadius(value),
+          setTextScale: (value) => state.setTextScale(value),
+          connected: state.connected,
+          gatewayUrl: state.settings.gatewayUrl,
+          assistantName: state.assistantName,
+          version: state.hello?.server?.version ?? "",
+          onConfigureMenu: openConfigureMenuSection,
+        });
+        const configureBody =
+          configureSelection.activeSection === "channels"
+            ? html`
+                <section class="card" style="margin-top: 16px;">
+                  <div
+                    class="row"
+                    style="justify-content: space-between; gap: 12px; flex-wrap: wrap;"
+                  >
+                    <div>
+                      <div class="card-title">Channel setup hub</div>
+                      <div class="card-sub">
+                        Add, edit, delete, relink, dan simpan channel langsung dari web dengan form
+                        yang lebih ringkas.
+                      </div>
+                    </div>
+                    <button class="btn btn--sm" @click=${clearConfigureSelection}>
+                      Back to hub
+                    </button>
+                  </div>
+                </section>
+                ${renderConfigureChannelsPanel()}
+              `
+            : configureSelection.activeSection
+              ? html`
+                  <section class="card" style="margin-top: 16px;">
+                    <div class="row" style="justify-content: space-between; gap: 12px;">
+                      <div>
+                        <div class="card-title">Configure ${configureSelection.activeSection}</div>
+                        <div class="card-sub">
+                          Edit pengaturan section ini langsung dari web, lalu Save/Apply tanpa
+                          pindah ke tab lain.
+                        </div>
+                      </div>
+                      <button class="btn btn--sm" @click=${clearConfigureSelection}>
+                        Back to hub
+                      </button>
+                    </div>
+                  </section>
+                  ${renderConfigTab({
+                    formMode: state.configFormMode,
+                    searchQuery: state.configSearchQuery,
+                    activeSection: configureSelection.activeSection,
+                    activeSubsection: configureSelection.activeSubsection,
+                    onFormModeChange: (mode) => (state.configFormMode = mode),
+                    onSearchChange: (query) => (state.configSearchQuery = query),
+                    onSectionChange: (section) => {
+                      state.configActiveSection = section;
+                      state.configActiveSubsection = null;
+                    },
+                    onSubsectionChange: (section) => (state.configActiveSubsection = section),
+                    showModeToggle: true,
+                    showRootTab: false,
+                    settingsLayout: "accordion",
+                    onBackToQuick: undefined,
+                    includeSections: [...CONFIGURE_SECTION_KEYS],
+                  })}
+                `
+              : html`
+                  <section class="card" style="margin-top: 16px;">
+                    <div class="card-title">Pick a setup area</div>
+                    <div class="card-sub">
+                      Mulai dari hub di atas. Setiap pilihan bakal buka editor yang relevan langsung
+                      di halaman ini.
+                    </div>
+                  </section>
+                `;
+        return html`${configureMenu}${configureBody}`;
+      }
       case "channels":
-        return renderLazyView(lazyChannels, (m) =>
-          m.renderChannels({
-            connected: state.connected,
-            loading: state.channelsLoading,
-            snapshot: state.channelsSnapshot,
-            lastError: state.channelsError,
-            lastSuccessAt: state.channelsLastSuccess,
-            whatsappMessage: state.whatsappLoginMessage,
-            whatsappQrDataUrl: state.whatsappLoginQrDataUrl,
-            whatsappConnected: state.whatsappLoginConnected,
-            whatsappBusy: state.whatsappBusy,
-            configSchema: state.configSchema,
-            configSchemaLoading: state.configSchemaLoading,
-            configForm: state.configForm,
-            configUiHints: state.configUiHints,
-            configSaving: state.configSaving,
-            configFormDirty: state.configFormDirty,
-            nostrProfileFormState: state.nostrProfileFormState,
-            nostrProfileAccountId: state.nostrProfileAccountId,
-            onRefresh: (probe) => void loadChannels(state, probe),
-            onWhatsAppStart: (force) => void state.handleWhatsAppStart(force),
-            onWhatsAppWait: () => void state.handleWhatsAppWait(),
-            onWhatsAppLogout: () => void state.handleWhatsAppLogout(),
-            onConfigPatch: (path, value) => updateConfigFormValue(state, path, value),
-            onConfigSave: () => void state.handleChannelConfigSave(),
-            onConfigReload: () => void state.handleChannelConfigReload(),
-            onNostrProfileEdit: (accountId, profile) =>
-              state.handleNostrProfileEdit(accountId, profile),
-            onNostrProfileCancel: () => state.handleNostrProfileCancel(),
-            onNostrProfileFieldChange: (field, value) =>
-              state.handleNostrProfileFieldChange(field, value),
-            onNostrProfileSave: () => void state.handleNostrProfileSave(),
-            onNostrProfileImport: () => void state.handleNostrProfileImport(),
-            onNostrProfileToggleAdvanced: () => state.handleNostrProfileToggleAdvanced(),
-          }),
-        );
+        return renderChannelsPanel();
       case "communications":
         return renderConfigTab({
           formMode: state.communicationsFormMode,

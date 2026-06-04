@@ -8,6 +8,61 @@
   width: 100%;
 }
 
+.qs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 16px;
+}
+
+.qs-list-item {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 88px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--bg-elevated) 48%, var(--card) 52%);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.qs-list-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border) 70%);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card) 92%);
+  transform: translateY(-1px);
+}
+
+.qs-list-item:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent) 44%, var(--border) 56%);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.qs-list-item__content {
+  display: grid;
+  gap: 6px;
+}
+
+.qs-list-item__title {
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.qs-list-item__subtitle {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.channels-config-actions {
+  flex-wrap: wrap;
+}
+
 /* Logs opt into a fill-height chain so the log stream, not the page, owns
    desktop scrolling. Other settings routes keep the default `.content` scroll.
 

@@ -481,6 +481,28 @@ describe("updateConfigFormValue", () => {
     });
     expect(state.configFormDirty).toBe(false);
   });
+
+  it("allows a configured channel plugin when plugins.allow is restrictive", () => {
+    const state = createState();
+    applyConfigSnapshot(state, {
+      hash: "hash-channel-plugin",
+      config: {
+        plugins: { allow: ["openai"] },
+        channels: { whatsapp: { enabled: false } },
+      },
+      valid: true,
+      issues: [],
+      raw: "{}",
+    });
+
+    updateConfigFormValue(state, ["channels", "whatsapp", "enabled"], true);
+
+    expect(state.configForm).toEqual({
+      plugins: { allow: ["openai", "whatsapp"] },
+      channels: { whatsapp: { enabled: true } },
+    });
+    expect(state.configFormDirty).toBe(true);
+  });
 });
 
 describe("updateMcpServerEnabled", () => {
