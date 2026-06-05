@@ -1623,8 +1623,24 @@ export function renderApp(state: AppViewState) {
             fastMode,
             onModelChange: () => {
               state.configSettingsMode = "advanced";
-              state.aiAgentsActiveSection = "models";
-              state.setTab("aiAgents");
+              state.configActiveSection = "models";
+              state.configActiveSubsection = null;
+              state.setTab("configure");
+              requestHostUpdate?.();
+            },
+            onModelConfigure: () => {
+              state.configSettingsMode = "advanced";
+              state.configActiveSection = "models";
+              state.configActiveSubsection = null;
+              state.setTab("configure");
+              requestHostUpdate?.();
+            },
+            onAuthConfigure: () => {
+              state.configSettingsMode = "advanced";
+              state.configActiveSection = "auth";
+              state.configActiveSubsection = null;
+              state.setTab("configure");
+              requestHostUpdate?.();
             },
             onThinkingChange: (level) => {
               void patchSession(state, state.sessionKey, { thinkingLevel: level }).then(() =>

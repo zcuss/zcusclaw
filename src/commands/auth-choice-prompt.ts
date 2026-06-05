@@ -37,7 +37,7 @@ export async function promptAuthChoiceGrouped(params: {
       return group.options[0].value;
     }
     return (await params.prompter.select({
-      message: `${group.label} auth method`,
+      message: `${group.label} setup method`,
       options: [...group.options, { value: BACK_VALUE, label: "Back" }],
     })) as AuthChoiceOrBack;
   };
@@ -47,7 +47,7 @@ export async function promptAuthChoiceGrouped(params: {
       const options: WizardSelectOption[] = moreGroups.map(groupToOption);
       options.push({ value: BACK_VALUE, label: "Back" });
       const selection = await params.prompter.select({
-        message: "Model/auth provider",
+        message: "Choose a model provider",
         options,
         searchable: true,
       });
@@ -75,7 +75,7 @@ export async function promptAuthChoiceGrouped(params: {
         flatOptions.push({ value: skipOption.value, label: skipOption.label });
       }
       const selection = await params.prompter.select({
-        message: "Model/auth provider",
+        message: "Choose a model provider",
         options: flatOptions,
         searchable: true,
       });
@@ -85,8 +85,8 @@ export async function promptAuthChoiceGrouped(params: {
       const group = groupById.get(selection);
       if (!group || group.options.length === 0) {
         await params.prompter.note(
-          "No auth methods available for that provider.",
-          "Model/auth choice",
+          "No setup methods are available for that provider.",
+          "Model provider",
         );
         continue;
       }
@@ -110,7 +110,7 @@ export async function promptAuthChoiceGrouped(params: {
     }
 
     const topSelection = await params.prompter.select({
-      message: "Model/auth provider",
+      message: "Choose a model provider",
       options: topTier,
     });
 
@@ -127,8 +127,8 @@ export async function promptAuthChoiceGrouped(params: {
     const group = groupById.get(topSelection);
     if (!group || group.options.length === 0) {
       await params.prompter.note(
-        "No auth methods available for that provider.",
-        "Model/auth choice",
+        "No setup methods are available for that provider.",
+        "Model provider",
       );
       continue;
     }

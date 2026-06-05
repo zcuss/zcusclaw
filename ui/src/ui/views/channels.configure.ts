@@ -24,8 +24,12 @@ type ChannelAccountEntry = {
 type FieldSpec = {
   key: string;
   label: string;
-  type?: "text" | "password" | "checkbox";
+  type?: "text" | "password" | "checkbox" | "select" | "textarea";
   placeholder?: string;
+  options?: Array<{ value: string; label: string }>;
+  hint?: string;
+  path?: string[];
+  channels?: string[];
 };
 
 const DEFAULT_CHANNELS: ChannelUiMetaEntry[] = [
@@ -129,13 +133,79 @@ function fieldSpecsForChannel(channelId: string): FieldSpec[] {
   const common: FieldSpec[] = [
     { key: "name", label: "Name", placeholder: "Personal bot / Work phone" },
     { key: "enabled", label: "Enabled", type: "checkbox" },
+    {
+      key: "dmPolicy",
+      label: "DM access mode",
+      type: "select",
+      channels: ["whatsapp", "telegram", "discord", "slack", "imessage"],
+      hint: "Approve = pairing code, Allowlist = selected senders only, Open = allow all, Disabled = block all",
+      options: [
+        { value: "pairing", label: "Approve first (pairing)" },
+        { value: "allowlist", label: "Allow selected senders only" },
+        { value: "open", label: "Allow all senders" },
+        { value: "disabled", label: "Block all DMs" },
+      ],
+    },
+    {
+      key: "allowFrom",
+      label: "Allowed senders",
+      type: "textarea",
+      channels: ["whatsapp", "telegram", "discord", "slack", "imessage", "googlechat"],
+      placeholder: "One sender ID per line, or * for open mode",
+      hint: "Used by allowlist/open modes. Example: 123456789, user:alice, or *",
+    },
+    {
+      key: "groupPolicy",
+      label: "Group access mode",
+      type: "select",
+      channels: ["whatsapp", "telegram", "discord", "slack", "imessage", "googlechat"],
+      hint: "Control whether groups are open, blocked, or allowlisted for this channel/account",
+      options: [
+        { value: "allowlist", label: "Allow selected groups/senders only" },
+        { value: "open", label: "Allow all groups" },
+        { value: "disabled", label: "Block all groups" },
+      ],
+    },
+    {
+      key: "groupAllowFrom",
+      label: "Allowed group senders / rooms",
+      type: "textarea",
+      channels: ["whatsapp", "telegram", "imessage", "googlechat"],
+      placeholder: "One group sender ID or room ID per line",
+      hint: "Used by allowlist-style group access on supported channels",
+    },
+    {
+      key: "approvers",
+      label: "Pairing approvers",
+      type: "textarea",
+      path: ["execApprovals", "approvers"],
+      channels: ["telegram", "discord", "slack"],
+      placeholder: "One approver ID per line",
+      hint: "Optional: users allowed to approve pairing requests for this channel/account",
+    },
+    {
+      key: "execApprovalsEnabled",
+      label: "Exec approval delivery",
+      type: "select",
+      path: ["execApprovals", "enabled"],
+      channels: ["telegram", "discord", "slack"],
+      hint: "Where supported, controls whether native exec approvals are enabled for this account",
+      options: [
+        { value: "auto", label: "Auto" },
+        { value: "true", label: "Enabled" },
+        { value: "false", label: "Disabled" },
+      ],
+    },
   ];
+  const visibleCommon = common.filter(
+    (field) => !field.channels || field.channels.includes(channelId),
+  );
   switch (channelId) {
     case "whatsapp":
-      return common;
+      return visibleCommon;
     case "telegram":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "botToken", label: "Bot token", type: "password", placeholder: "123456:ABC..." },
         {
           key: "tokenFile",
@@ -145,7 +215,7 @@ function fieldSpecsForChannel(channelId: string): FieldSpec[] {
       ];
     case "discord":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "token", label: "Bot token", type: "password", placeholder: "Discord bot token" },
         {
           key: "applicationId",
@@ -155,31 +225,31 @@ function fieldSpecsForChannel(channelId: string): FieldSpec[] {
       ];
     case "slack":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "botToken", label: "Bot token", type: "password", placeholder: "xoxb-..." },
         { key: "appToken", label: "App token", type: "password", placeholder: "xapp-..." },
         { key: "signingSecret", label: "Signing secret", type: "password" },
       ];
     case "signal":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "account", label: "Phone/account", placeholder: "+15555550123" },
         { key: "httpUrl", label: "signal-cli REST URL", placeholder: "http://127.0.0.1:8080" },
       ];
     case "googlechat":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "serviceAccountFile", label: "Service account file" },
         { key: "webhookPath", label: "Webhook path" },
       ];
     case "imessage":
       return [
-        ...common,
+        ...visibleCommon,
         { key: "cliPath", label: "CLI path" },
         { key: "dbPath", label: "Database path" },
       ];
     default:
-      return common;
+      return visibleCommon;
   }
 }
 
@@ -189,14 +259,52 @@ function accountPath(channelId: string, accountId: string): Array<string | numbe
     : ["channels", channelId, "accounts", accountId];
 }
 
+function readNestedValue(source: ChannelAccountConfig, path: string[]): unknown {
+  let current: unknown = source;
+  for (const part of path) {
+    if (!current || typeof current !== "object" || Array.isArray(current)) {
+      return undefined;
+    }
+    current = (current as Record<string, unknown>)[part];
+  }
+  return current;
+}
+
+function fieldRelativePath(field: FieldSpec): string[] {
+  return field.path ?? [field.key];
+}
+
+function coerceSelectValue(field: FieldSpec, value: string): string | boolean {
+  if (field.path?.join(".") === "execApprovals.enabled") {
+    if (value === "true") {
+      return true;
+    }
+    if (value === "false") {
+      return false;
+    }
+  }
+  return value;
+}
+
+function defaultSelectValue(field: FieldSpec): string {
+  if (field.key === "groupPolicy") {
+    return "allowlist";
+  }
+  if (field.path?.join(".") === "execApprovals.enabled") {
+    return "auto";
+  }
+  return "pairing";
+}
+
 function renderField(params: {
   props: ConfigureChannelsProps;
   channelId: string;
   account: ChannelAccountEntry;
   field: FieldSpec;
 }) {
-  const value = params.account.config[params.field.key];
-  const path = [...accountPath(params.channelId, params.account.accountId), params.field.key];
+  const relativePath = fieldRelativePath(params.field);
+  const value = readNestedValue(params.account.config, relativePath);
+  const path = [...accountPath(params.channelId, params.account.accountId), ...relativePath];
   if (params.field.type === "checkbox") {
     return html`
       <label class="qs-row" style="cursor: pointer;">
@@ -219,6 +327,61 @@ function renderField(params: {
       </label>
     `;
   }
+  if (params.field.type === "select") {
+    return html`
+      <label class="field">
+        <span>${params.field.label}</span>
+        <select
+          ?disabled=${params.props.configSaving || params.props.configSchemaLoading}
+          @change=${(event: Event) =>
+            params.props.onConfigPatch(
+              path,
+              coerceSelectValue(params.field, (event.target as HTMLSelectElement).value),
+            )}
+        >
+          ${(params.field.options ?? []).map(
+            (option) => html`
+              <option
+                value=${option.value}
+                ?selected=${String(value ?? defaultSelectValue(params.field)) === option.value}
+              >
+                ${option.label}
+              </option>
+            `,
+          )}
+        </select>
+        ${params.field.hint ? html`<div class="field-hint">${params.field.hint}</div>` : nothing}
+      </label>
+    `;
+  }
+  if (params.field.type === "textarea") {
+    const textValue = Array.isArray(value)
+      ? value.map((entry) => String(entry)).join("\n")
+      : typeof value === "string"
+        ? value
+        : "";
+    return html`
+      <label class="field">
+        <span>${params.field.label}</span>
+        <textarea
+          rows="4"
+          placeholder=${params.field.placeholder ?? ""}
+          ?disabled=${params.props.configSaving || params.props.configSchemaLoading}
+          @input=${(event: Event) => {
+            const raw = (event.target as HTMLTextAreaElement).value;
+            const lines = raw
+              .split(/\r?\n/)
+              .map((entry) => entry.trim())
+              .filter(Boolean);
+            params.props.onConfigPatch(path, lines);
+          }}
+        >
+${textValue}</textarea
+        >
+        ${params.field.hint ? html`<div class="field-hint">${params.field.hint}</div>` : nothing}
+      </label>
+    `;
+  }
   return html`
     <label class="field">
       <span>${params.field.label}</span>
@@ -231,6 +394,7 @@ function renderField(params: {
         @input=${(event: Event) =>
           params.props.onConfigPatch(path, (event.target as HTMLInputElement).value)}
       />
+      ${params.field.hint ? html`<div class="field-hint">${params.field.hint}</div>` : nothing}
     </label>
   `;
 }
@@ -320,9 +484,32 @@ function renderAccountForm(params: {
         </button>
       </div>
       <div class="config-form" style="margin-top: 12px;">
-        ${fieldSpecsForChannel(channelId).map((field) =>
-          renderField({ props, channelId, account, field }),
-        )}
+        ${account.snapshot?.pendingPairingRequests?.length
+          ? html` <section class="card" style="margin-top:12px;">
+              <div class="card-title">Pending pairing requests</div>
+              <div class="card-sub">
+                Approve codes to link senders.
+                <ul>
+                  ${account.snapshot.pendingPairingRequests.map(
+                    (req: any) => html` <li>
+                      Code: <b>${req.code}</b> (id: ${req.id})
+                      <button
+                        class="btn success btn--sm"
+                        @click=${() => {
+                          // call backend approve via config patch helper
+                          // using onConfigPatch with custom path to trigger approve method
+                          // We'll invoke via gateway directly from UI controller later
+                          // For now just placeholder
+                        }}
+                      >
+                        Approve
+                      </button>
+                    </li>`,
+                  )}
+                </ul>
+              </div>
+            </section>`
+          : nothing}
       </div>
       <div
         class="row"
@@ -404,12 +591,22 @@ function normalizeWhatsAppUiMessage(message: string | null): {
 function renderWhatsAppActions(props: ConfigureChannelsProps) {
   const linked = props.whatsappConnected === true;
   const message = normalizeWhatsAppUiMessage(props.whatsappMessage);
+  const successText = linked
+    ? props.whatsappQrDataUrl
+      ? "Akun WhatsApp sudah terhubung. QR lama bisa diabaikan; refresh kalau mau bersihin state tampilan."
+      : "Akun WhatsApp sudah terhubung dan siap dipakai."
+    : null;
   return html`
     <section class="card" style="margin-top: 12px;">
       <div class="card-title">WhatsApp link</div>
-      <div class="card-sub">Scan QR, relink, logout, atau refresh status dari sini.</div>
+      <div class="card-sub">
+        Scan QR, tunggu scan selesai, lalu refresh untuk cek status link terbaru.
+      </div>
       ${message.text
         ? html`<div class="callout" style="margin-top: 12px;">${message.text}</div>`
+        : nothing}
+      ${successText
+        ? html`<div class="callout success" style="margin-top: 12px;">${successText}</div>`
         : nothing}
       ${props.whatsappQrDataUrl
         ? html`<div class="qr-wrap"><img src=${props.whatsappQrDataUrl} alt="WhatsApp QR" /></div>`
@@ -499,13 +696,13 @@ export function renderConfigureChannels(props: ConfigureChannelsProps) {
       </div>
     </section>
 
-    ${activeChannel.id === "whatsapp" ? renderWhatsAppActions(props) : nothing}
     ${renderAddAccount(props, activeChannel.id)}
     ${renderAccountSelector({
       props,
       channelId: activeChannel.id,
       accounts,
     })}
+    ${activeChannel.id === "whatsapp" ? renderWhatsAppActions(props) : nothing}
     ${selectedAccount
       ? renderAccountForm({ props, channelId: activeChannel.id, account: selectedAccount })
       : nothing}

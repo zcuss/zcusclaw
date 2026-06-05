@@ -223,12 +223,12 @@ Runbook: [iOS connect](https://docs.openclaw.ai/platforms/ios).
 
 ## From source (development)
 
-Use `pnpm` for source checkouts. The repository is a pnpm workspace, and bundled
-plugins load from `extensions/*` during development so their package-local
-dependencies and your edits are used directly. Plain `npm install` at the repo
-root is not a supported source setup.
+Source checkouts require **Node 24 (recommended) or Node 22.19+** and the
+workspace-pinned `pnpm` version. This repo is a pnpm workspace: bundled plugins
+load from `extensions/*` during development, so root `npm install` does not
+prepare the full source tree.
 
-For the dev loop:
+### First run
 
 ```bash
 git clone https://github.com/openclaw/openclaw.git
@@ -239,23 +239,88 @@ pnpm install
 # First run only (or after resetting local OpenClaw config/workspace)
 pnpm openclaw setup
 
-# Optional: prebuild Control UI before first startup
+# Optional: prebuild the Control UI before first Gateway startup
 pnpm ui:build
+```
 
-# Dev loop (auto-reload on source/config changes)
+### Gateway dev modes
+
+| Command                                                   | Use when                                                                                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm gateway:watch`                                      | You want the normal hot-reload Gateway loop. It runs in a named tmux session and auto-attaches from interactive terminals. |
+| `pnpm gateway:watch:raw`                                  | You want the same Gateway watch loop in the foreground, without tmux.                                                      |
+| `OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch`      | You want tmux-managed watch mode but do not want the current terminal to attach.                                           |
+| `OPENCLAW_GATEWAY_WATCH_AUTO_DOCTOR=0 pnpm gateway:watch` | You want to see the original startup failure instead of the dev-only `openclaw doctor --fix --non-interactive` retry.      |
+| `pnpm gateway:dev`                                        | You want an isolated dev profile with channels skipped.                                                                    |
+| `pnpm gateway:dev:reset`                                  | You want to reset that isolated dev profile before starting it.                                                            |
+
+The usual Gateway loop is:
+
+```bash
 pnpm gateway:watch
 ```
 
-If you need a built `dist/` from the checkout (for Node, packaging, or release validation), run:
+The Gateway WebSocket defaults to `ws://127.0.0.1:18789`; keep the app and CLI on
+the same port. If you are also running the macOS app, set **Connection Mode** to
+**Local** so it attaches to the Gateway from this checkout.
+
+### Control UI dev mode
+
+For backend + UI development, use two terminals:
 
 ```bash
-pnpm build
-pnpm ui:build
+# Terminal 1, from the repo root
+pnpm gateway:watch
+
+# Terminal 2, from the repo root
+pnpm ui:dev
 ```
 
-`pnpm openclaw setup` writes the local config/workspace needed for `pnpm gateway:watch`. It is safe to re-run, but you normally only need it on first setup or after resetting local state. `pnpm gateway:watch` does not rebuild `dist/control-ui`, so rerun `pnpm ui:build` after `ui/` changes or use `pnpm ui:dev` when iterating on the Control UI. If you want this checkout to run onboarding directly, use `pnpm openclaw onboard --install-daemon`.
+`pnpm ui:dev` starts the Vite Control UI dev server. The default Vite port is
+`5173`; if another server already uses it, choose another port:
 
-Note: `pnpm openclaw ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `openclaw` binary, while `pnpm gateway:watch` rebuilds the runtime on demand during the dev loop.
+```bash
+pnpm ui:dev -- --port 5174
+```
+
+You can also run the UI package script directly:
+
+```bash
+cd ui
+pnpm dev
+```
+
+`pnpm gateway:watch` does not rebuild `dist/control-ui`. When changing `ui/`, use
+`pnpm ui:dev` for hot reload or run `pnpm ui:build` before testing the built UI
+served from `dist/control-ui`.
+
+### Build and checks
+
+```bash
+# Build the repo output used by Node/package validation
+pnpm build
+
+# Build the production Control UI bundle
+pnpm ui:build
+
+# Run focused tests
+pnpm test <path-or-filter>
+
+# Run changed checks
+pnpm check:changed
+```
+
+`pnpm openclaw ...` runs TypeScript directly via the dev loader. `pnpm build`
+produces `dist/` for running through Node or the packaged `openclaw` binary, while
+`pnpm gateway:watch` rebuilds the runtime on demand during the dev loop.
+
+### Local environment gotchas
+
+- If `pnpm` warns that Node is too old or crashes with `ERR_UNKNOWN_BUILTIN_MODULE: node:sqlite`, the terminal is using Node 20 or older. Switch that terminal to Node 22.19+ or Node 24 before running `pnpm`.
+- In read-only or Nix-style environments, `corepack enable` can fail because it tries to create package-manager shims under a read-only system path. Use a shell where Node 22.19+/24 and the workspace-pinned pnpm are both on `PATH`, or install pnpm into a writable user prefix.
+- If Vite reports `Port 5173 is already in use`, stop the old dev server or pass another port with `pnpm ui:dev -- --port 5174`.
+
+Full source setup details: [Setup](https://docs.openclaw.ai/start/setup).
 
 ## Development channels
 

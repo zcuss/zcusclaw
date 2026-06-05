@@ -22,6 +22,10 @@ import type { ChannelAccountSnapshot } from "../../channels/plugins/types.public
 import { readConfigFileSnapshot } from "../../config/config.js";
 import type { OpenClawConfig } from "../../config/types.openclaw.js";
 import { getChannelActivity } from "../../infra/channel-activity.js";
+import {
+  approveChannelPairingCode,
+  listChannelPairingRequests,
+} from "../../pairing/pairing-store.js";
 import { DEFAULT_ACCOUNT_ID } from "../../routing/session-key.js";
 import { defaultRuntime } from "../../runtime.js";
 import { runTasksWithConcurrency } from "../../utils/run-with-concurrency.js";
@@ -475,6 +479,16 @@ export const channelsHandlers: GatewayRequestHandlers = {
       if (snapshot.lastOutboundAt == null) {
         snapshot.lastOutboundAt = activity.outboundAt;
       }
+      const pendingPairingRequests = await listChannelPairingRequests(
+        channelId,
+        process.env,
+        accountId,
+      );
+      if (pendingPairingRequests.length > 0) {
+        (
+          snapshot as ChannelAccountSnapshot & { pendingPairingRequests?: unknown }
+        ).pendingPairingRequests = pendingPairingRequests;
+      }
       const health = evaluateChannelHealth(snapshot, {
         channelId,
         now: Date.now(),
@@ -703,5 +717,63 @@ export const channelsHandlers: GatewayRequestHandlers = {
           plugin,
         }),
     });
+  },
+  "channels.pairing.list": async ({ params, respond }) => {
+    const rawChannel = (params as { channel?: unknown }).channel;
+    const channelId = typeof rawChannel === "string" ? normalizeChannelId(rawChannel) : null;
+    if (!channelId) {
+      respond(
+        false,
+        undefined,
+        errorShape(ErrorCodes.INVALID_REQUEST, "invalid channels.pairing.list channel"),
+      );
+      return;
+    }
+    const accountId = normalizeOptionalString((params as { accountId?: unknown }).accountId);
+    try {
+      const requests = await listChannelPairingRequests(
+        channelId,
+        process.env,
+        accountId ?? undefined,
+      );
+      respond(true, { channel: channelId, accountId: accountId ?? null, requests }, undefined);
+    } catch (error) {
+      respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, formatForLog(error)));
+    }
+  },
+  "channels.pairing.approve": async ({ params, respond }) => {
+    const rawChannel = (params as { channel?: unknown }).channel;
+    const channelId = typeof rawChannel === "string" ? normalizeChannelId(rawChannel) : null;
+    const code = normalizeOptionalString((params as { code?: unknown }).code);
+    const accountId = normalizeOptionalString((params as { accountId?: unknown }).accountId);
+    if (!channelId || !code) {
+      respond(
+        false,
+        undefined,
+        errorShape(
+          ErrorCodes.INVALID_REQUEST,
+          "channels.pairing.approve requires channel and code",
+        ),
+      );
+      return;
+    }
+    try {
+      const approved = await approveChannelPairingCode({
+        channel: channelId,
+        code,
+        accountId: accountId ?? undefined,
+      });
+      if (!approved) {
+        respond(
+          false,
+          undefined,
+          errorShape(ErrorCodes.INVALID_REQUEST, `no pending pairing request for code ${code}`),
+        );
+        return;
+      }
+      respond(true, { channel: channelId, accountId: accountId ?? null, approved }, undefined);
+    } catch (error) {
+      respond(false, undefined, errorShape(ErrorCodes.UNAVAILABLE, formatForLog(error)));
+    }
   },
 };

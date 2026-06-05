@@ -278,6 +278,69 @@ describe("configure channels form", () => {
 
     expect(container.textContent).toContain("Add account");
     expect(container.textContent).toContain("Main bot");
+    expect(container.textContent).toContain("DM access mode");
+    expect(container.textContent).toContain("Approve first (pairing)");
+    expect(container.textContent).toContain("Allow selected senders only");
+    expect(container.textContent).toContain("Allow all senders");
+    expect(container.textContent).toContain("Block all DMs");
+    expect(container.textContent).toContain("Allowed senders");
+    expect(container.textContent).toContain("Group access mode");
+    expect(container.textContent).toContain("Allow selected groups/senders only");
+    expect(container.textContent).toContain("Allowed group senders / rooms");
+    expect(container.textContent).toContain("Pairing approvers");
+    expect(container.textContent).toContain("Exec approval delivery");
+
+    const policySelect = Array.from(container.querySelectorAll<HTMLSelectElement>("select")).find(
+      (select) => Array.from(select.options).some((option) => option.value === "allowlist"),
+    );
+    expect(policySelect).toBeInstanceOf(HTMLSelectElement);
+    policySelect!.value = "allowlist";
+    policySelect!.dispatchEvent(new Event("change"));
+    expect(onConfigPatch).toHaveBeenCalledWith(["channels", "telegram", "dmPolicy"], "allowlist");
+
+    const groupPolicySelect = Array.from(
+      container.querySelectorAll<HTMLSelectElement>("select"),
+    ).find((select) => Array.from(select.options).some((option) => option.value === "open"));
+    expect(groupPolicySelect).toBeInstanceOf(HTMLSelectElement);
+    groupPolicySelect!.value = "disabled";
+    groupPolicySelect!.dispatchEvent(new Event("change"));
+    expect(onConfigPatch).toHaveBeenCalledWith(["channels", "telegram", "groupPolicy"], "disabled");
+
+    const execApprovalsSelect = Array.from(
+      container.querySelectorAll<HTMLSelectElement>("select"),
+    ).find((select) => Array.from(select.options).some((option) => option.value === "true"));
+    expect(execApprovalsSelect).toBeInstanceOf(HTMLSelectElement);
+    execApprovalsSelect!.value = "true";
+    execApprovalsSelect!.dispatchEvent(new Event("change"));
+    expect(onConfigPatch).toHaveBeenCalledWith(
+      ["channels", "telegram", "execApprovals", "enabled"],
+      true,
+    );
+
+    const [allowFromInput, groupAllowFromInput, approversInput] = Array.from(
+      container.querySelectorAll<HTMLTextAreaElement>("textarea"),
+    );
+    expect(allowFromInput).toBeInstanceOf(HTMLTextAreaElement);
+    allowFromInput!.value = "123\n456\n";
+    allowFromInput!.dispatchEvent(new Event("input"));
+    expect(onConfigPatch).toHaveBeenCalledWith(
+      ["channels", "telegram", "allowFrom"],
+      ["123", "456"],
+    );
+    expect(groupAllowFromInput).toBeInstanceOf(HTMLTextAreaElement);
+    groupAllowFromInput!.value = "group1\ngroup2";
+    groupAllowFromInput!.dispatchEvent(new Event("input"));
+    expect(onConfigPatch).toHaveBeenCalledWith(
+      ["channels", "telegram", "groupAllowFrom"],
+      ["group1", "group2"],
+    );
+    expect(approversInput).toBeInstanceOf(HTMLTextAreaElement);
+    approversInput!.value = "admin1\nadmin2";
+    approversInput!.dispatchEvent(new Event("input"));
+    expect(onConfigPatch).toHaveBeenCalledWith(
+      ["channels", "telegram", "execApprovals", "approvers"],
+      ["admin1", "admin2"],
+    );
 
     const tokenInput = Array.from(container.querySelectorAll<HTMLInputElement>("input")).find(
       (input) => input.value === "old-token",

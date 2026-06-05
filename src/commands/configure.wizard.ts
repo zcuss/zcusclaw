@@ -187,17 +187,17 @@ async function promptChannelMode(runtime: RuntimeEnv): Promise<ChannelsWizardMod
       message: "Channel setup",
       options: [
         {
-          value: "configure",
-          label: "Add or update channels",
-          hint: "Configure accounts and disable unselected accounts",
+          value: "manage",
+          label: "Manage channels",
+          hint: "Add accounts, edit settings, disable channels, delete configs, and review DM access",
         },
         {
           value: "remove",
           label: "Remove channel config",
-          hint: "Delete channel tokens/settings from openclaw.json",
+          hint: "Removal-only flow for deleting channel tokens/settings from openclaw.json",
         },
       ],
-      initialValue: "configure",
+      initialValue: "manage",
     }),
     runtime,
   ) as ChannelsWizardMode;
@@ -618,7 +618,7 @@ export async function runConfigureWizard(
 
     const configureChannelsSection = async () => {
       const channelMode = await promptChannelMode(runtime);
-      if (channelMode === "configure") {
+      if (channelMode === "manage") {
         nextConfig = await setupChannels(nextConfig, runtime, prompter, {
           allowDisable: true,
           allowSignalInstall: true,

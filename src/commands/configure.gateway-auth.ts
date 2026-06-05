@@ -232,6 +232,7 @@ export async function promptAuthConfig(
       const modelSelection = await promptDefaultModel({
         config: next,
         prompter,
+        message: "Choose a default model",
         allowKeep: true,
         ignoreAllowlist: true,
         includeProviderPluginSetups: false,
@@ -298,7 +299,7 @@ export async function promptAuthConfig(
       env: process.env,
       allowedKeys: modelPrompt?.allowedKeys,
       initialSelections: modelPrompt?.initialSelections,
-      message: modelPrompt?.message,
+      message: modelPrompt?.message ?? "Choose models to show in /model",
       preferredProvider: promptProvider,
       providerScopedCatalog: useProviderScopedCatalog,
       loadCatalog: shouldLoadModelCatalog,

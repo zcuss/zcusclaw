@@ -69,6 +69,13 @@ export type ChannelAccountSnapshot = {
   probe?: unknown;
   audit?: unknown;
   application?: unknown;
+  pendingPairingRequests?: Array<{
+    id: string;
+    code: string;
+    createdAt: string;
+    lastSeenAt?: string;
+    meta?: Record<string, string>;
+  }> | null;
 };
 
 export type WhatsAppSelf = {

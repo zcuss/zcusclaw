@@ -58,6 +58,8 @@ export type QuickSettingsProps = {
   thinkingLevel: string;
   fastMode: boolean;
   onModelChange?: () => void;
+  onModelConfigure?: () => void;
+  onAuthConfigure?: () => void;
   onThinkingChange?: (level: string) => void;
   onFastModeToggle?: () => void;
 
@@ -422,14 +424,28 @@ function renderCardHeader(icon: TemplateResult, title: string, action?: Template
 function renderModelCard(props: QuickSettingsProps) {
   return html`
     <div class="qs-card qs-card--model">
-      ${renderCardHeader(icons.brain, "Model & Thinking")}
+      ${renderCardHeader(
+        icons.brain,
+        "Model & Thinking",
+        html`<button class="qs-link-btn" @click=${props.onModelConfigure ?? props.onModelChange}>
+          Configure →
+        </button>`,
+      )}
       <div class="qs-card__body">
         <div class="qs-row">
-          <span class="qs-row__label">Model</span>
+          <span class="qs-row__label">Default model</span>
           <button class="qs-row__value qs-row__value--action" @click=${props.onModelChange}>
             <code>${props.currentModel || "default"}</code>
             <span class="qs-row__chevron">${icons.chevronRight}</span>
           </button>
+        </div>
+        <div class="qs-row">
+          <span class="qs-row__label">Providers & auth</span>
+          <span class="qs-row__value">
+            <button class="qs-link-btn" @click=${props.onAuthConfigure ?? props.onModelConfigure}>
+              Add provider / setup →
+            </button>
+          </span>
         </div>
         <div class="qs-row">
           <span class="qs-row__label">Thinking</span>

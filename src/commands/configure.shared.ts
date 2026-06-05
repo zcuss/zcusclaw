@@ -43,7 +43,7 @@ export function parseConfigureWizardSections(raw: unknown): {
   return { sections, invalid };
 }
 
-export type ChannelsWizardMode = "configure" | "remove";
+export type ChannelsWizardMode = "manage" | "remove";
 
 export type ConfigureWizardParams = {
   command: "configure" | "update";

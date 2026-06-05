@@ -47,6 +47,7 @@ export type ChannelsProps = {
   onNostrProfileSave: () => void;
   onNostrProfileImport: () => void;
   onNostrProfileToggleAdvanced: () => void;
+  onPairingApprove?: (channel: string, code: string, accountId?: string) => Promise<void> | void;
 };
 
 export type ChannelsChannelData = {

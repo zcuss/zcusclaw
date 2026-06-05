@@ -30,6 +30,8 @@ export const CORE_GATEWAY_METHOD_SPECS: readonly CoreGatewayMethodSpec[] = [
   { name: "doctor.memory.remHarness", scope: "operator.read" },
   { name: "logs.tail", scope: "operator.read" },
   { name: "channels.status", scope: "operator.read" },
+  { name: "channels.pairing.list", scope: "operator.pairing" },
+  { name: "channels.pairing.approve", scope: "operator.pairing" },
   { name: "channels.start", scope: "operator.admin" },
   { name: "channels.stop", scope: "operator.admin" },
   { name: "channels.logout", scope: "operator.admin" },

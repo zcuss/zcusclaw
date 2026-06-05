@@ -98,26 +98,62 @@ pnpm openclaw setup
 pnpm gateway:watch
 ```
 
-`gateway:watch` starts or restarts the Gateway watch process in a named tmux
-session and auto-attaches from interactive terminals. Non-interactive shells stay
-detached and print `tmux attach -t openclaw-gateway-watch-main`; use
-`OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch` to keep an interactive run
-detached, or `pnpm gateway:watch:raw` for foreground watch mode. The watcher
-reloads on relevant source, config, and bundled-plugin metadata changes. If the
-watched Gateway exits during startup, `gateway:watch` runs
-`openclaw doctor --fix --non-interactive` once and retries; set
-`OPENCLAW_GATEWAY_WATCH_AUTO_DOCTOR=0` to disable that dev-only repair pass.
-`pnpm openclaw setup` is the one-time local config/workspace initialization step for a fresh checkout.
-`pnpm gateway:watch` does not rebuild `dist/control-ui`, so rerun `pnpm ui:build` after `ui/` changes or use `pnpm ui:dev` while developing the Control UI.
+`pnpm openclaw setup` is the one-time local config/workspace initialization step
+for a fresh checkout. `gateway:watch` starts or restarts the Gateway watch
+process in a named tmux session and auto-attaches from interactive terminals.
+Non-interactive shells stay detached and print
+`tmux attach -t openclaw-gateway-watch-main`.
 
-### 2) Point the macOS app at your running Gateway
+| Command                                                   | Use when                                                                                                              |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `pnpm gateway:watch`                                      | You want the normal tmux-managed hot-reload Gateway loop.                                                             |
+| `pnpm gateway:watch:raw`                                  | You want foreground watch mode without tmux.                                                                          |
+| `OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch`      | You want tmux-managed watch mode but do not want the current terminal to attach.                                      |
+| `OPENCLAW_GATEWAY_WATCH_AUTO_DOCTOR=0 pnpm gateway:watch` | You want to see the original startup failure instead of the dev-only `openclaw doctor --fix --non-interactive` retry. |
+| `pnpm gateway:dev`                                        | You want an isolated dev profile with channels skipped.                                                               |
+| `pnpm gateway:dev:reset`                                  | You want to reset that isolated dev profile before starting it.                                                       |
+
+The watcher reloads on relevant source, config, and bundled-plugin metadata
+changes. `pnpm gateway:watch` does not rebuild `dist/control-ui`, so rerun
+`pnpm ui:build` after `ui/` changes or use `pnpm ui:dev` while developing the
+Control UI.
+
+### 2) Develop the Control UI
+
+For backend + UI development, use two terminals:
+
+```bash
+# Terminal 1, from the repo root
+pnpm gateway:watch
+
+# Terminal 2, from the repo root
+pnpm ui:dev
+```
+
+`pnpm ui:dev` starts the Vite Control UI dev server. The default Vite port is
+`5173`; if another server already uses it, choose another port:
+
+```bash
+pnpm ui:dev -- --port 5174
+```
+
+You can also run the UI package script directly:
+
+```bash
+cd ui
+pnpm dev
+```
+
+Use `pnpm ui:build` when you need the built Control UI in `dist/control-ui`.
+
+### 3) Point the macOS app at your running Gateway
 
 In **OpenClaw.app**:
 
 - Connection Mode: **Local**
   The app will attach to the running gateway on the configured port.
 
-### 3) Verify
+### 4) Verify
 
 - In-app Gateway status should read **"Using existing gateway …"**
 - Or via CLI:
@@ -129,6 +165,9 @@ openclaw health
 ### Common footguns
 
 - **Wrong port:** Gateway WS defaults to `ws://127.0.0.1:18789`; keep app + CLI on the same port.
+- **Old Node:** Source checkouts require Node 22.19+ or Node 24. If `pnpm` fails with `node:sqlite`, the terminal is probably still using Node 20.
+- **Read-only Corepack shims:** In read-only or Nix-style environments, `corepack enable` can fail while creating global shims. Use a shell where Node 22.19+/24 and the workspace-pinned pnpm are already on `PATH`, or install pnpm into a writable user prefix.
+- **Busy UI port:** Vite uses `5173` by default. Stop the old server or pass another port with `pnpm ui:dev -- --port 5174`.
 - **Where state lives:**
   - Channel/provider state: `~/.openclaw/credentials/`
   - Model auth profiles: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
